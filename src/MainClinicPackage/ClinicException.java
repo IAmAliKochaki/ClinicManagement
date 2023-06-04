@@ -1,2 +1,7 @@
-package MainClinicPackage;public class ClinicExeption {
+package MainClinicPackage;
+
+public class ClinicException extends Exception{
+    public ClinicException(String message) {
+        super(message);
+    }
 }

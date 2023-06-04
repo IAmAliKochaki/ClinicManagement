@@ -3,14 +3,11 @@ package MainClinicPackage;
 import SuperClassesPackage.Personnel;
 
 public class Employee extends Personnel {
-    private static int employee_ID = 1;
-    private int employeeID;
     private String position;
 
-    public Employee(String fullName,String position, int age, String address, long phoneNumber, String userName, String passWord, int baseSalary) {
+    public Employee(String fullName,String position, int age, String address, String phoneNumber, String userName, String passWord, int baseSalary) {
         super(fullName, age, address, phoneNumber, userName, passWord, baseSalary);
         this.position = position;
-        this.employeeID = employee_ID++;
     }
 
     public void setPosition(String position) {
@@ -21,18 +18,14 @@ public class Employee extends Personnel {
         return position;
     }
 
-    public int getEmployeeID() {
-        return employeeID;
-    }
-
     @Override
     public String toString() {
-        return "Nurse{" +
+        return "Employee{" +
                 "fullName: '" + fullName + '\'' +
                 ", position: " + position +
                 ", age: " + age +
                 ", baseSalary: " + baseSalary +
-                ", employeeID: " + employeeID +
+                ", employeeID: " + personnelID +
                 ", address: '" + address + '\'' +
                 ", phoneNumber: " + phoneNumber +
                 ", userName: '" + userName + '\'' +

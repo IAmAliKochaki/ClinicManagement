@@ -1,86 +1,87 @@
 package MainClinicPackage;
 
-import SuperClassesPackage.Person;
 import SuperClassesPackage.Personnel;
 
-public class Manager extends Person {
-    String managerID;
 
-    public Manager(String fullName, int age, String address, long phoneNumber, String userName, String passWord) {
-        super(fullName, age, address, phoneNumber, userName, passWord);
-    }
+public abstract class Manager {
+    public static String fullName = "ali kochaki";
+    public static int age = 20;
+    public static String address = "qaemshahr";
+    public static String phoneNumber = "09368212956";
+    public static String username = "ali1382";
+    public static String password = "043018";
 
-    public void showDoctors() {
+    public static void showDoctors() {
         for (Doctor doctor : Clinic.doctors) {
             System.out.println(doctor);
         }
     }
 
-    public void showPatient() {
+    public static void showPatient() {
         for (Patient patient : Clinic.patients) {
             System.out.println(patient);
         }
     }
 
-    public void showCompleteVisits() {
+    public static void showCompleteVisits() {
         for (Visit visit : Clinic.visits) {
             if (visit.getChecked())
-            System.out.println(visit);
+                System.out.println(visit);
         }
     }
 
-    public void showIncompleteVisits() {
+    public static void showIncompleteVisits() {
         for (Visit visit : Clinic.visits) {
             if (!(visit.getChecked()))
-            System.out.println(visit);
+                System.out.println(visit);
         }
     }
 
-    public void showDrugs() {
+    public static void showDrugs() {
         for (Drug drug : Clinic.drugs) {
             System.out.println(drug);
         }
     }
 
-    public void showNurses() {
+    public static void showNurses() {
         for (Nurse nurse : Clinic.nurses) {
             System.out.println(nurse);
         }
     }
 
-    public void showEmployee() {
+    public static void showEmployee() {
         for (Employee employee : Clinic.employees) {
             System.out.println(employee);
         }
     }
 
-    public void showProtection() {
+    public static void showProtection() {
         for (Protection protection : Clinic.protections) {
             System.out.println(protection);
         }
     }
 
-    public void addDoctor(Doctor doctor) {
+    public static void  addDoctor(Doctor doctor) {
         Clinic.doctors.add(doctor);
     }
 
-    public void addDrug(Drug drug) {
-        Clinic.drugs.add(drug);
+    public static void addDrug(Drug drug) {
+        Clinic.drugs.add((Drug) drug);
     }
 
-    public void addNurse(Nurse nurse) {
+    public static void addNurse(Nurse nurse) {
         Clinic.nurses.add(nurse);
     }
 
-    public void addEmployee(Employee employee) {
+    public static void addEmployee(Employee employee) {
         Clinic.employees.add(employee);
     }
 
-    public void addProtection(Protection protection) {
+    public static void addProtection(Protection protection) {
         Clinic.protections.add(protection);
     }
 
-    public Doctor getDoctorByID(int id) {
+    public static Doctor getDoctorByID(int id) {
         Doctor targetDoctor = null;
         for (Doctor doctor : Clinic.doctors) {
             if (doctor.getMedicalID() == id) {
@@ -91,7 +92,7 @@ public class Manager extends Person {
         return targetDoctor;
     }
 
-    public Patient getPatientByID(int id) {
+    public static Patient getPatientByID(int id) {
         Patient targetPatient = null;
         for (Patient patient : Clinic.patients) {
             if (patient.getPatientID() == id) {
@@ -102,7 +103,7 @@ public class Manager extends Person {
         return targetPatient;
     }
 
-    public Drug getDrugByID(int id) {
+    public static Drug getDrugByID(int id) {
         Drug targetDrug = null;
         for (Drug drug : Clinic.drugs) {
             if (drug.getDrugID() == id) {
@@ -113,10 +114,10 @@ public class Manager extends Person {
         return targetDrug;
     }
 
-    public Nurse getNurseByID(int id) {
+    public static Nurse getNurseByID(int id) {
         Nurse targetNurse = null;
         for (Nurse nurse : Clinic.nurses) {
-            if (nurse.getNurseID() == id) {
+            if (nurse.getPersonnelID() == id) {
                 targetNurse = nurse;
                 break;
             }
@@ -124,10 +125,10 @@ public class Manager extends Person {
         return targetNurse;
     }
 
-    public Employee getEmployeeByID(int id) {
+    public static Employee getEmployeeByID(int id) {
         Employee targetEmployee = null;
         for (Employee employee : Clinic.employees) {
-            if (employee.getEmployeeID() == id) {
+            if (employee.getPersonnelID() == id) {
                 targetEmployee = employee;
                 break;
             }
@@ -135,10 +136,10 @@ public class Manager extends Person {
         return targetEmployee;
     }
 
-    public Protection getProtectionByID(int id) {
+    public static Protection getProtectionByID(int id) {
         Protection targetProtection = null;
         for (Protection protection : Clinic.protections) {
-            if (protection.getProtectionID() == id) {
+            if (protection.getPersonnelID() == id) {
                 targetProtection = protection;
                 break;
             }
@@ -146,48 +147,50 @@ public class Manager extends Person {
         return targetProtection;
     }
 
-    public void removeDoctor(int id) {
+    public static void removeDoctor(int id) {
         Clinic.doctors.remove(getDoctorByID(id));
     }
 
-    public void removePatient(int id) {
+    public static void removePatient(int id) {
         Clinic.patients.remove(getPatientByID(id));
     }
 
-    public void removeDrug(int id) {
+    public static void removeDrug(int id) {
         Clinic.drugs.remove(getDrugByID(id));
     }
 
-    public void removeNurse(int id) {
+    public static void removeNurse(int id) {
         Clinic.nurses.remove(getNurseByID(id));
     }
 
-    public void removeEmployee(int id) {
+    public static void removeEmployee(int id) {
         Clinic.employees.remove(getEmployeeByID(id));
     }
 
-    public void removeProtection(int id) {
+    public static void removeProtection(int id) {
         Clinic.protections.remove(getProtectionByID(id));
     }
 
-    public void paymentDoctorsClaim(Doctor doctor){
+    public static void paymentDoctorsClaim(Doctor doctor) throws ClinicException {
         Clinic.balance -= doctor.getClaim();
         doctor.setClaim(0);
     }
 
     //registration of personnel's overtime with use polymorphism
-    public void registrationOfPersonnelOvertime(Personnel personnel, int overtime){
+    public static void registrationOfPersonnelOvertime(Personnel personnel, int overtime) throws ClinicException {
+        if (overtime < 0)
+            throw new ClinicException("Overtime can't be less than 0");
         personnel.setOvertime(overtime);
     }
 
     //Paying Nurses , Employee and protection's salary with use polymorphism
-    public void payPersonnelSalary(Personnel personnel){
+    public static void payPersonnelSalary(Personnel personnel) {
         Clinic.balance -= personnel.calculateSalary((personnel.getOvertime()));
         personnel.setOvertime(0);
         personnel.setSalary(0);
     }
 
-    public void changePersonnelBaseSalary(Personnel personnel , double baseSalary){
+    public static void changePersonnelBaseSalary(Personnel personnel, double baseSalary) {
         personnel.setBaseSalary(baseSalary);
     }
 }

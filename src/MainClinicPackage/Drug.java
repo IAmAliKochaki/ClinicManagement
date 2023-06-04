@@ -1,6 +1,6 @@
 package MainClinicPackage;
 
-public class DrugClass implements Drug{
+public class Drug{
     private static int drug_ID = 1;
     private int drugID;
     private String name;
@@ -10,7 +10,7 @@ public class DrugClass implements Drug{
     private String expireDate;
     private String description;
 
-    public DrugClass(String name, String expertise, String company, String makeDate, String expireDate, String description) {
+    public Drug(String name, String expertise, String company, String makeDate, String expireDate, String description) {
         this.name = name;
         this.expertise = expertise;
         this.company = company;
@@ -20,12 +20,10 @@ public class DrugClass implements Drug{
         this.drugID = drug_ID++;
     }
 
-    @Override
     public int getDrugID() {
         return drugID;
     }
 
-    @Override
     public String getExpertise() {
         return expertise;
     }

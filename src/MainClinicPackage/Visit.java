@@ -51,7 +51,7 @@ public class Visit {
 
     //add drug to prescription
     public void completePrescription(Drug drug){
-        prescription.add(drug);
+        prescription.add((Drug) drug);
     }
 
     @Override

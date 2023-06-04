@@ -1,10 +1,13 @@
 package MainClinicPackage;
 
 
-import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        MainMenu.main();
+        /*
         var doctor = new Doctor("ali", 20, "sari", 936, "user", "pass", "dakheli", 20);
         var patient = new Patient("kazem", 25, "babol", 990, "username", "password");
 //        var visit = new Visit(doctor, patient);
@@ -22,16 +25,16 @@ public class Main {
 //        tests2.add(test);
 //        System.out.println(tests1.get(0));
 //        System.out.println(tests2.get(0));
-        var manager = new Manager("ali", 35, "Qaemshahr" , 990 , "043018" ,"401301");
-        var nurse = new Nurse("sara" , 24 ,"tehran" , 901 , "gang" , "1111" , 2000);
-        var employee = new Employee("hamed" ,"nub" , 40 ,"karaj" , 919 , "emp" , "word", 2000);
-        var protection = new Protection("sara" , 27 ,"kashan" , 912 , "gangSta" ,"1234" ,2000);
-        var drug = new Drug("zhelofen" , "mosaken" , "sina daro" , "2022" , "2024" , "best++");
-        manager.addDoctor(doctor);
-        manager.addDrug(drug);
-        manager.addEmployee(employee);
-        manager.addNurse(nurse);
-        manager.addProtection(protection);
+        var nurse = new Nurse("sara", 24, "tehran", 901, "gang", "1111", 2000);
+        var employee = new Employee("hamed", "nub", 40, "karaj", 919, "emp", "word", 2000);
+        var protection = new Protection("sara", 27, "kashan", 912, "gangSta", "1234", 2000);
+        var drug = new Drug("zhelofen", "mosaken", "sina daro", "2022", "2024", "best++");
+        Manager.addDoctor(doctor);
+
+        Manager.addDrug(drug);
+        Manager.addEmployee(employee);
+        Manager.addNurse(nurse);
+        Manager.addProtection(protection);
 //        System.out.println("showDoctors");
 //        manager.showDoctors();
 //        System.out.println("------------------------------------------------------------------------------------\n");
@@ -57,7 +60,35 @@ public class Main {
 //        System.out.println("------------------------------------------------------------------------------------\n");
 //        System.out.println("showInCompleteVisits");
         patient.showInCompleteVisits();
-        doctor.visiting(1 , drug);
+        doctor.visiting(1, drug);
         patient.showCompleteVisits();
+        try {
+            manager.registrationOfPersonnelOvertime(nurse, 20);
+            manager.registrationOfPersonnelOvertime(employee, 10);
+            manager.registrationOfPersonnelOvertime(protection, -1);
+
+        } catch (ClinicException e) {
+            System.out.println(e.getMessage());
+        }
+        manager.payPersonnelSalary(employee);
+        manager.payPersonnelSalary(nurse);
+        manager.payPersonnelSalary(protection);
+
+        System.out.println(Clinic.balance);
+
+        manager.removeDoctor(1);
+        manager.removeDrug(1);
+        manager.removeEmployee(1);
+        manager.removeNurse(1);
+        manager.removePatient(1);
+        manager.removeProtection(1);
+
+        manager.showDoctors();
+        manager.showPatient();
+        manager.showDrugs();
+        manager.showNurses();
+        manager.showEmployee();
+        manager.showProtection();*/
+
     }
 }

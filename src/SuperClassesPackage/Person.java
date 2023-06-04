@@ -4,11 +4,11 @@ public abstract class Person {
     protected String fullName;
     protected int age;
     protected String address;
-    protected long phoneNumber;
+    protected String phoneNumber;
     protected String userName;
     protected String passWord;
 
-    public Person(String fullName, int age, String address, long phoneNumber, String userName, String passWord) {
+    public Person(String fullName, int age, String address, String phoneNumber, String userName, String passWord) {
         this.fullName = fullName;
         this.age = age;
         this.address = address;
@@ -21,7 +21,7 @@ public abstract class Person {
         this.address = address;
     }
 
-    public void setPhoneNumber(long phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -45,7 +45,7 @@ public abstract class Person {
         return address;
     }
 
-    public long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
@@ -57,7 +57,7 @@ public abstract class Person {
         return passWord;
     }
 
-    public void edit(String address , long phoneNumber , String username , String password){
+    public void edit(String address , String phoneNumber , String username , String password){
         setAddress(address);
         setPhoneNumber(phoneNumber);
         setUserName(username);

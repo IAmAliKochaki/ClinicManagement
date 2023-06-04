@@ -9,10 +9,11 @@ public class Patient extends Person {
     private int patientID;
     private ArrayList<Visit> visits;
 
-    public Patient(String fullName, int age, String address, long phoneNumber, String userName, String passWord) {
+    public Patient(String fullName, int age, String address, String phoneNumber, String userName, String passWord) {
         super(fullName, age, address, phoneNumber, userName, passWord);
         this.patientID = patient_ID++;
         this.visits= new ArrayList<>();
+        Clinic.patients.add(this);
     }
 
     public int getPatientID() {

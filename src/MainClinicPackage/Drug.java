@@ -1,8 +1,6 @@
 package MainClinicPackage;
 
-import java.util.Date;
-
-public class Drug {
+public class DrugClass implements Drug{
     private static int drug_ID = 1;
     private int drugID;
     private String name;
@@ -12,7 +10,7 @@ public class Drug {
     private String expireDate;
     private String description;
 
-    public Drug(String name, String expertise, String company, String makeDate, String expireDate, String description) {
+    public DrugClass(String name, String expertise, String company, String makeDate, String expireDate, String description) {
         this.name = name;
         this.expertise = expertise;
         this.company = company;
@@ -22,11 +20,26 @@ public class Drug {
         this.drugID = drug_ID++;
     }
 
+    @Override
     public int getDrugID() {
         return drugID;
     }
 
+    @Override
     public String getExpertise() {
         return expertise;
+    }
+
+    @Override
+    public String toString() {
+        return "Drug{" +
+                "name: '" + name + '\'' +
+                ", expertise: '" + expertise + '\'' +
+                ", company: '" + company + '\'' +
+                ", makeDate: '" + makeDate + '\'' +
+                ", expireDate: '" + expireDate + '\'' +
+                ", description: '" + description + '\'' +
+                ", drugID: " + drugID +
+                '}';
     }
 }

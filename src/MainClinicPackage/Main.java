@@ -6,6 +6,22 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        MyFile.readDoctors();
+        MyFile.readPatients();
+        MyFile.readNurses();
+        MyFile.readEmployees();
+        MyFile.readProtections();
+        MyFile.readVisits();
+        MyFile.readDrugs();
+
+//        Clinic.doctors = MyFile.doctors;
+//        Clinic.patients = MyFile.patients;
+//        Clinic.nurses = MyFile.nurses;
+//        Clinic.employees = MyFile.employees;
+//        Clinic.protections = MyFile.protections;
+//        Clinic.visits = MyFile.visits;
+//        Clinic.drugs = MyFile.drugs;
+
         MainMenu.main();
         /*
         var doctor = new Doctor("ali", 20, "sari", 936, "user", "pass", "dakheli", 20);
@@ -89,6 +105,28 @@ public class Main {
         manager.showNurses();
         manager.showEmployee();
         manager.showProtection();*/
-
+//        System.out.print("Full name: ");
+//        String name = scanner.nextLine();
+//
+//        System.out.print("Age: ");
+//        int age = intScanner.nextInt();
+//
+//        System.out.print("expertise: ");
+//        String expertise = scanner.nextLine();
+//
+//        System.out.print("Fee: ");
+//        int fee = intScanner.nextInt();
+//
+//        System.out.print("Address: ");
+//        String address = scanner.nextLine();
+//
+//        System.out.print("Phone number: ");
+//        String phoneNumber = scanner.nextLine();
+//
+//        System.out.print("Username");
+//        String userName = scanner.nextLine();
+//
+//        System.out.print("Password");
+//        String passWord = scanner.nextLine();
     }
 }

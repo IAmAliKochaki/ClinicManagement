@@ -5,7 +5,7 @@ import SuperClassesPackage.Person;
 import java.util.ArrayList;
 
 public class Patient extends Person {
-    private static int patient_ID = 1;
+    public static int patient_ID = 1;
     private int patientID;
     private ArrayList<Visit> visits;
 
@@ -41,6 +41,10 @@ public class Patient extends Person {
         for (Visit visit : visits)
             if (!(visit.getChecked()))
                 System.out.println(visit);
+    }
+
+    public void save() {
+        MyFile.save(this);
     }
 
     @Override

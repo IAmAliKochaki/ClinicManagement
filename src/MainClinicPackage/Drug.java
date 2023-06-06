@@ -1,7 +1,9 @@
 package MainClinicPackage;
 
-public class Drug{
-    private static int drug_ID = 1;
+import java.io.Serializable;
+
+public class Drug implements Serializable {
+    public static int drug_ID = 1;
     private int drugID;
     private String name;
     private String expertise;
@@ -26,6 +28,10 @@ public class Drug{
 
     public String getExpertise() {
         return expertise;
+    }
+
+    public void save() {
+        MyFile.save(this);
     }
 
     @Override

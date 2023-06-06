@@ -9,8 +9,8 @@ import java.util.List;
 public class Doctor extends Person {
     public static List expertises = Arrays.asList("cosmetic_dermatologists", "cardiologist", "general_practitioner", "gynecologist", "internist", "ophthalmologist", "pediatrician", "psychiatrist");
     private String expertise;
-    private static int doctorID = 1;
-    private int medicalID;
+    public static int doctor_ID = 1;
+    private int doctorID;
     private int fee;
     private int claim;
     private ArrayList<Visit> visits;
@@ -18,7 +18,7 @@ public class Doctor extends Person {
     public Doctor(String fullName, int age, String address, String phoneNumber, String userName, String passWord, String expertise, int fee) {
         super(fullName, age, address, phoneNumber, userName, passWord);
         this.expertise = expertise;
-        this.medicalID = doctorID++;
+        doctorID = doctor_ID++;
         this.fee = fee;
         this.visits = new ArrayList<>();
     }
@@ -33,10 +33,6 @@ public class Doctor extends Person {
 
     public String getExpertise() {
         return expertise;
-    }
-
-    public int getMedicalID() {
-        return medicalID;
     }
 
     public int getFee() {
@@ -67,6 +63,10 @@ public class Doctor extends Person {
                 completeVisits.add(visit);
         }
         return completeVisits;
+    }
+
+    public int getDoctorID() {
+        return doctorID;
     }
 
     //when the doctor complete the visit
@@ -107,7 +107,7 @@ public class Doctor extends Person {
         return "Doctor{" +
                 "fullName: '" + fullName +
                 '\'' + " , expertise: '" + expertise +
-                '\'' + " , medicalID: " + medicalID +
+                '\'' + " , doctorID: " + doctorID +
                 " , fee: " + fee +
                 " , claim: " + claim +
                 " , age: " + age +
@@ -116,5 +116,9 @@ public class Doctor extends Person {
                 " , userName: '" + userName + '\'' +
                 " , passWord: '" + passWord + '\'' +
                 '}';
+    }
+
+    public void save() {
+        MyFile.save(this);
     }
 }

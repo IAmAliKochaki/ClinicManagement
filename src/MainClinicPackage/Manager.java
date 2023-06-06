@@ -84,7 +84,7 @@ public abstract class Manager {
     public static Doctor getDoctorByID(int id) {
         Doctor targetDoctor = null;
         for (Doctor doctor : Clinic.doctors) {
-            if (doctor.getMedicalID() == id) {
+            if (doctor.getDoctorID() == id) {
                 targetDoctor = doctor;
                 break;
             }
@@ -117,7 +117,7 @@ public abstract class Manager {
     public static Nurse getNurseByID(int id) {
         Nurse targetNurse = null;
         for (Nurse nurse : Clinic.nurses) {
-            if (nurse.getPersonnelID() == id) {
+            if (nurse.getNurseID() == id) {
                 targetNurse = nurse;
                 break;
             }
@@ -128,7 +128,7 @@ public abstract class Manager {
     public static Employee getEmployeeByID(int id) {
         Employee targetEmployee = null;
         for (Employee employee : Clinic.employees) {
-            if (employee.getPersonnelID() == id) {
+            if (employee.getEmployeeID() == id) {
                 targetEmployee = employee;
                 break;
             }
@@ -139,7 +139,7 @@ public abstract class Manager {
     public static Protection getProtectionByID(int id) {
         Protection targetProtection = null;
         for (Protection protection : Clinic.protections) {
-            if (protection.getPersonnelID() == id) {
+            if (protection.getProtectionID() == id) {
                 targetProtection = protection;
                 break;
             }

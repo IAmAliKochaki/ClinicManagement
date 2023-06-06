@@ -1,6 +1,8 @@
 package SuperClassesPackage;
 
-public abstract class Person {
+import java.io.Serializable;
+
+public abstract class Person implements Serializable {
     protected String fullName;
     protected int age;
     protected String address;

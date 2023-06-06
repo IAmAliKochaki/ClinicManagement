@@ -7,13 +7,10 @@ public abstract class Personnel extends Person {
     protected double baseSalary;
     protected double overtime;
     protected double salary;
-    protected static int  personnel_ID = 1;
-    protected int personnelID;
 
     public Personnel(String fullName, int age, String address, String phoneNumber, String userName, String passWord, double baseSalary) {
         super(fullName, age, address, phoneNumber, userName, passWord);
         this.baseSalary = baseSalary;
-        personnelID = personnel_ID++;
     }
 
     public void setBaseSalary(double baseSalary) {
@@ -38,10 +35,6 @@ public abstract class Personnel extends Person {
 
     public double getSalary() {
         return salary;
-    }
-
-    public int getPersonnelID() {
-        return personnelID;
     }
 
     public double calculateSalary(double overtime){

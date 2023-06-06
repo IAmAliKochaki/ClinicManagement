@@ -1,10 +1,11 @@
 package MainClinicPackage;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Visit {
-    private static int visit_ID = 1;
+public class Visit implements Serializable {
+    public static int visit_ID = 1;
     private int visitID;
     private Doctor doctor;
     private Patient patient;
@@ -54,6 +55,9 @@ public class Visit {
         prescription.add((Drug) drug);
     }
 
+    public void save() {
+        MyFile.save(this);
+    }
     @Override
     public String toString() {
         return "Visit{" +

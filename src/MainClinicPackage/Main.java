@@ -13,6 +13,7 @@ public class Main {
         MyFile.readProtections();
         MyFile.readVisits();
         MyFile.readDrugs();
+        Clinic.balance = MyFile.balance;
 
 //        Clinic.doctors = MyFile.doctors;
 //        Clinic.patients = MyFile.patients;

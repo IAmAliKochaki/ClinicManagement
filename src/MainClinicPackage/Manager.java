@@ -61,7 +61,7 @@ public abstract class Manager {
         }
     }
 
-    public static void  addDoctor(Doctor doctor) {
+    public static void addDoctor(Doctor doctor) {
         Clinic.doctors.add(doctor);
     }
 
@@ -81,7 +81,7 @@ public abstract class Manager {
         Clinic.protections.add(protection);
     }
 
-    public static Doctor getDoctorByID(int id) {
+    public static Doctor getDoctorByID(int id) throws Exception {
         Doctor targetDoctor = null;
         for (Doctor doctor : Clinic.doctors) {
             if (doctor.getDoctorID() == id) {
@@ -89,10 +89,12 @@ public abstract class Manager {
                 break;
             }
         }
+        if (targetDoctor == null)
+            throw new Exception("There is no doctor with this ID! please  check and try again.");
         return targetDoctor;
     }
 
-    public static Patient getPatientByID(int id) {
+    public static Patient getPatientByID(int id) throws Exception {
         Patient targetPatient = null;
         for (Patient patient : Clinic.patients) {
             if (patient.getPatientID() == id) {
@@ -100,10 +102,12 @@ public abstract class Manager {
                 break;
             }
         }
+        if (targetPatient == null)
+            throw new Exception("There is no patient with this ID! please  check and try again.");
         return targetPatient;
     }
 
-    public static Drug getDrugByID(int id) {
+    public static Drug getDrugByID(int id) throws Exception {
         Drug targetDrug = null;
         for (Drug drug : Clinic.drugs) {
             if (drug.getDrugID() == id) {
@@ -111,10 +115,12 @@ public abstract class Manager {
                 break;
             }
         }
+        if (targetDrug == null)
+            throw new Exception("There is no drug with this ID! please  check and try again.");
         return targetDrug;
     }
 
-    public static Nurse getNurseByID(int id) {
+    public static Nurse getNurseByID(int id) throws Exception {
         Nurse targetNurse = null;
         for (Nurse nurse : Clinic.nurses) {
             if (nurse.getNurseID() == id) {
@@ -122,10 +128,12 @@ public abstract class Manager {
                 break;
             }
         }
+        if (targetNurse == null)
+            throw new Exception("There is no nurse with this ID! please  check and try again.");
         return targetNurse;
     }
 
-    public static Employee getEmployeeByID(int id) {
+    public static Employee getEmployeeByID(int id) throws Exception {
         Employee targetEmployee = null;
         for (Employee employee : Clinic.employees) {
             if (employee.getEmployeeID() == id) {
@@ -133,10 +141,12 @@ public abstract class Manager {
                 break;
             }
         }
+        if (targetEmployee == null)
+            throw new Exception("There is no employee with this ID! please  check and try again.");
         return targetEmployee;
     }
 
-    public static Protection getProtectionByID(int id) {
+    public static Protection getProtectionByID(int id) throws Exception {
         Protection targetProtection = null;
         for (Protection protection : Clinic.protections) {
             if (protection.getProtectionID() == id) {
@@ -144,42 +154,24 @@ public abstract class Manager {
                 break;
             }
         }
+        if (targetProtection == null)
+            throw new Exception("There is no protection with this ID! please  check and try again.");
         return targetProtection;
     }
 
-    public static void removeDoctor(int id) {
-        Clinic.doctors.remove(getDoctorByID(id));
-    }
-
-    public static void removePatient(int id) {
-        Clinic.patients.remove(getPatientByID(id));
-    }
-
-    public static void removeDrug(int id) {
-        Clinic.drugs.remove(getDrugByID(id));
-    }
-
-    public static void removeNurse(int id) {
-        Clinic.nurses.remove(getNurseByID(id));
-    }
-
-    public static void removeEmployee(int id) {
-        Clinic.employees.remove(getEmployeeByID(id));
-    }
-
-    public static void removeProtection(int id) {
-        Clinic.protections.remove(getProtectionByID(id));
-    }
-
-    public static void paymentDoctorsClaim(Doctor doctor) throws ClinicException {
+    public static void paymentDoctorsClaim(Doctor doctor) throws Exception {
+        if (Clinic.balance < doctor.getClaim())
+            throw new Exception("Insufficient inventory");
         Clinic.balance -= doctor.getClaim();
+        if (doctor.getClaim() == 0)
+            throw new Exception("There is no claim to pay");
         doctor.setClaim(0);
     }
 
     //registration of personnel's overtime with use polymorphism
-    public static void registrationOfPersonnelOvertime(Personnel personnel, int overtime) throws ClinicException {
+    public static void registrationOfPersonnelOvertime(Personnel personnel, int overtime) throws Exception {
         if (overtime < 0)
-            throw new ClinicException("Overtime can't be less than 0");
+            throw new Exception("Overtime can't be less than 0");
         personnel.setOvertime(overtime);
     }
 

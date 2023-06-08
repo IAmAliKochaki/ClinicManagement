@@ -47,21 +47,25 @@ public class Doctor extends Person {
         return visits;
     }
 
-    public ArrayList<Visit> getInCompleteVisits() {
+    public ArrayList<Visit> getInCompleteVisits() throws Exception {
         ArrayList<Visit> inCompleteVisits = new ArrayList<>();
         for (Visit visit : visits) {
             if (!(visit.getChecked()))
                 inCompleteVisits.add(visit);
         }
+        if (inCompleteVisits.size()==0)
+            throw new Exception("There are no incomplete visits!");
         return inCompleteVisits;
     }
 
-    public ArrayList<Visit> getCompleteVisits() {
+    public ArrayList<Visit> getCompleteVisits() throws Exception {
         ArrayList<Visit> completeVisits = new ArrayList<>();
         for (Visit visit : visits) {
             if (visit.getChecked())
                 completeVisits.add(visit);
         }
+        if (completeVisits.size()==0)
+            throw new Exception("There is no complete visit!");
         return completeVisits;
     }
 
@@ -98,7 +102,6 @@ public class Doctor extends Person {
             getInCompleteVisitByID(visitID).completePrescription(drug);
             getInCompleteVisitByID(visitID).setChecked(true);
         } catch (ClinicException e) {
-            System.out.println(e.getMessage());
         }
     }
 

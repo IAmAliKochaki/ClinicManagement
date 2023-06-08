@@ -28,7 +28,6 @@ public class Patient extends Person {
         Clinic.visits.add(visit);
     }
 
-
     public void showCompleteVisits() {
         for (Visit visit : visits){
             if (visit.getChecked()) {

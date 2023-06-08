@@ -12,6 +12,7 @@ public class MyFile {
     private static String protectionPath = "C:\\Users\\LENOVO\\OneDrive\\Desktop\\BestClinic\\files\\protection.txt";
     private static String drugPath = "C:\\Users\\LENOVO\\OneDrive\\Desktop\\BestClinic\\files\\drug.txt";
     private static String visitPath = "C:\\Users\\LENOVO\\OneDrive\\Desktop\\BestClinic\\files\\visit.txt";
+    private static String balancePath = "C:\\Users\\LENOVO\\OneDrive\\Desktop\\BestClinic\\files\\balance.txt";
 
 
     public static ArrayList<Doctor> doctors = new ArrayList();
@@ -21,6 +22,10 @@ public class MyFile {
     public static ArrayList<Protection> protections = new ArrayList();
     public static ArrayList<Drug> drugs = new ArrayList();
     public static ArrayList<Visit> visits = new ArrayList();
+    public static long balance;
+
+    public static void writeBalance() {
+    }/**/
 
     public static void writeDoctor() {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(doctorPath))) {
@@ -92,6 +97,7 @@ public class MyFile {
         }
     }
 
+    public static void readBalance() {}/**/
     public static void readDoctors() {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(doctorPath))) {
             while (true) {
@@ -107,6 +113,7 @@ public class MyFile {
             }
         }
     }
+
 
     public static void readPatients() {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(patientPath))) {
@@ -254,6 +261,11 @@ public class MyFile {
         writeNurse();
     }
 
+    public static void remove(Employee employee) {
+        employees.remove(employee);
+        writeEmployee();
+    }
+
     public static void remove(Protection protection) {
         protections.remove(protection);
         writeProtection();
@@ -262,10 +274,5 @@ public class MyFile {
     public static void remove(Drug drug) {
         drugs.remove(drug);
         writeDrug();
-    }
-
-    public static void remove(Visit visit) {
-        visits.remove(visit);
-        writeVisit();
     }
 }

@@ -76,7 +76,7 @@ public class Doctor extends Person {
     //when the doctor complete the visit
     public void completeVisiting() {
         claim += fee; //calculate claim
-        Clinic.balance += fee * 1.3; //As much as 30% of each visit is the share of the clinic :)
+        ClinicFile.balance += fee * 1.3; //As much as 30% of each visit is the share of the clinic :)
     }
 
     public void addVisit(Visit visit) {
@@ -84,7 +84,7 @@ public class Doctor extends Person {
     }
 
     //return the incomplete by id
-    public Visit getInCompleteVisitByID(int visitID) throws ClinicException {
+    public Visit getInCompleteVisitByID(int visitID) throws Exception {
         Visit targetVsit = null;
         for (Visit visit : visits) {
             if (visit.getVisitID() == visitID && !(visit.getChecked())) {
@@ -93,7 +93,7 @@ public class Doctor extends Person {
             }
         }
         if (targetVsit == null)
-            throw new ClinicException("Any incomplete visit with this id");
+            throw new Exception("Any incomplete visit with this id");
         return targetVsit;
     }
 
@@ -101,7 +101,7 @@ public class Doctor extends Person {
         try {
             getInCompleteVisitByID(visitID).completePrescription(drug);
             getInCompleteVisitByID(visitID).setChecked(true);
-        } catch (ClinicException e) {
+        } catch (Exception e) {
         }
     }
 
@@ -122,6 +122,6 @@ public class Doctor extends Person {
     }
 
     public void save() {
-        MyFile.save(this);
+        ClinicFile.save(this);
     }
 }

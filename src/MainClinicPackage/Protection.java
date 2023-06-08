@@ -16,7 +16,7 @@ public class Protection extends Personnel {
     }
 
     public void save() {
-        MyFile.save(this);
+        ClinicFile.save(this);
     }
 
     @Override

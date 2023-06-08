@@ -12,78 +12,78 @@ public abstract class Manager {
     public static String password = "043018";
 
     public static void showDoctors() {
-        for (Doctor doctor : Clinic.doctors) {
+        for (Doctor doctor : ClinicFile.doctors) {
             System.out.println(doctor);
         }
     }
 
     public static void showPatient() {
-        for (Patient patient : Clinic.patients) {
+        for (Patient patient : ClinicFile.patients) {
             System.out.println(patient);
         }
     }
 
     public static void showCompleteVisits() {
-        for (Visit visit : Clinic.visits) {
+        for (Visit visit : ClinicFile.visits) {
             if (visit.getChecked())
                 System.out.println(visit);
         }
     }
 
     public static void showIncompleteVisits() {
-        for (Visit visit : Clinic.visits) {
+        for (Visit visit : ClinicFile.visits) {
             if (!(visit.getChecked()))
                 System.out.println(visit);
         }
     }
 
     public static void showDrugs() {
-        for (Drug drug : Clinic.drugs) {
+        for (Drug drug : ClinicFile.drugs) {
             System.out.println(drug);
         }
     }
 
     public static void showNurses() {
-        for (Nurse nurse : Clinic.nurses) {
+        for (Nurse nurse : ClinicFile.nurses) {
             System.out.println(nurse);
         }
     }
 
     public static void showEmployee() {
-        for (Employee employee : Clinic.employees) {
+        for (Employee employee : ClinicFile.employees) {
             System.out.println(employee);
         }
     }
 
     public static void showProtection() {
-        for (Protection protection : Clinic.protections) {
+        for (Protection protection : ClinicFile.protections) {
             System.out.println(protection);
         }
     }
 
     public static void addDoctor(Doctor doctor) {
-        Clinic.doctors.add(doctor);
+        ClinicFile.doctors.add(doctor);
     }
 
     public static void addDrug(Drug drug) {
-        Clinic.drugs.add((Drug) drug);
+        ClinicFile.drugs.add((Drug) drug);
     }
 
     public static void addNurse(Nurse nurse) {
-        Clinic.nurses.add(nurse);
+        ClinicFile.nurses.add(nurse);
     }
 
     public static void addEmployee(Employee employee) {
-        Clinic.employees.add(employee);
+        ClinicFile.employees.add(employee);
     }
 
     public static void addProtection(Protection protection) {
-        Clinic.protections.add(protection);
+        ClinicFile.protections.add(protection);
     }
 
     public static Doctor getDoctorByID(int id) throws Exception {
         Doctor targetDoctor = null;
-        for (Doctor doctor : Clinic.doctors) {
+        for (Doctor doctor : ClinicFile.doctors) {
             if (doctor.getDoctorID() == id) {
                 targetDoctor = doctor;
                 break;
@@ -96,7 +96,7 @@ public abstract class Manager {
 
     public static Patient getPatientByID(int id) throws Exception {
         Patient targetPatient = null;
-        for (Patient patient : Clinic.patients) {
+        for (Patient patient : ClinicFile.patients) {
             if (patient.getPatientID() == id) {
                 targetPatient = patient;
                 break;
@@ -109,7 +109,7 @@ public abstract class Manager {
 
     public static Drug getDrugByID(int id) throws Exception {
         Drug targetDrug = null;
-        for (Drug drug : Clinic.drugs) {
+        for (Drug drug : ClinicFile.drugs) {
             if (drug.getDrugID() == id) {
                 targetDrug = drug;
                 break;
@@ -122,7 +122,7 @@ public abstract class Manager {
 
     public static Nurse getNurseByID(int id) throws Exception {
         Nurse targetNurse = null;
-        for (Nurse nurse : Clinic.nurses) {
+        for (Nurse nurse : ClinicFile.nurses) {
             if (nurse.getNurseID() == id) {
                 targetNurse = nurse;
                 break;
@@ -135,7 +135,7 @@ public abstract class Manager {
 
     public static Employee getEmployeeByID(int id) throws Exception {
         Employee targetEmployee = null;
-        for (Employee employee : Clinic.employees) {
+        for (Employee employee : ClinicFile.employees) {
             if (employee.getEmployeeID() == id) {
                 targetEmployee = employee;
                 break;
@@ -148,7 +148,7 @@ public abstract class Manager {
 
     public static Protection getProtectionByID(int id) throws Exception {
         Protection targetProtection = null;
-        for (Protection protection : Clinic.protections) {
+        for (Protection protection : ClinicFile.protections) {
             if (protection.getProtectionID() == id) {
                 targetProtection = protection;
                 break;
@@ -160,9 +160,9 @@ public abstract class Manager {
     }
 
     public static void paymentDoctorsClaim(Doctor doctor) throws Exception {
-        if (Clinic.balance < doctor.getClaim())
+        if (ClinicFile.balance < doctor.getClaim())
             throw new Exception("Insufficient inventory");
-        Clinic.balance -= doctor.getClaim();
+        ClinicFile.balance -= doctor.getClaim();
         if (doctor.getClaim() == 0)
             throw new Exception("There is no claim to pay");
         doctor.setClaim(0);
@@ -177,7 +177,7 @@ public abstract class Manager {
 
     //Paying Nurses , Employee and protection's salary with use polymorphism
     public static void payPersonnelSalary(Personnel personnel) {
-        Clinic.balance -= personnel.calculateSalary((personnel.getOvertime()));
+        ClinicFile.balance -= personnel.calculateSalary((personnel.getOvertime()));
         personnel.setOvertime(0);
         personnel.setSalary(0);
     }

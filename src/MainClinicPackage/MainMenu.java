@@ -51,7 +51,6 @@ public class MainMenu {
 
     //manager menu, show , add , remove , payment
     private static abstract class ManagerMenu {
-
         //manager login
         public static void main() {
             System.out.println("Enter your username: ");
@@ -417,7 +416,7 @@ public class MainMenu {
             System.out.print("Enter the doctor ID you want to remove: ");
             int id = intScanner.nextInt();
             try {
-                MyFile.remove(Manager.getDoctorByID(id));
+                ClinicFile.remove(Manager.getDoctorByID(id));
             } catch (Exception e) {
                 System.out.println("There is no doctor with this ID! please  check and try again.");
                 System.out.println("1: Back");
@@ -437,7 +436,7 @@ public class MainMenu {
             System.out.print("Enter the patient ID you want to remove: ");
             int id = intScanner.nextInt();
             try {
-                MyFile.remove(Manager.getPatientByID(id));
+                ClinicFile.remove(Manager.getPatientByID(id));
             } catch (Exception e) {
                 System.out.println("There is no patient with this ID! please  check and try again.");
                 System.out.println("1: Back");
@@ -457,7 +456,7 @@ public class MainMenu {
             System.out.print("Enter the nurse ID you want to remove: ");
             int id = intScanner.nextInt();
             try {
-                MyFile.remove(Manager.getNurseByID(id));
+                ClinicFile.remove(Manager.getNurseByID(id));
             } catch (Exception e) {
                 System.out.println("There is no nurse with this ID! please  check and try again.");
                 System.out.println("1: Back");
@@ -477,7 +476,7 @@ public class MainMenu {
             System.out.print("Enter the employee ID you want to remove: ");
             int id = intScanner.nextInt();
             try {
-                MyFile.remove(Manager.getEmployeeByID(id));
+                ClinicFile.remove(Manager.getEmployeeByID(id));
             } catch (Exception e) {
                 System.out.println("There is no employee with this ID! please  check and try again.");
                 System.out.println("1: Back");
@@ -497,7 +496,7 @@ public class MainMenu {
             System.out.print("Enter the protection ID you want to remove: ");
             int id = intScanner.nextInt();
             try {
-                MyFile.remove(Manager.getProtectionByID(id));
+                ClinicFile.remove(Manager.getProtectionByID(id));
             } catch (Exception e) {
                 System.out.println("There is no employee with this ID! please  check and try again.");
                 System.out.println("1: Back");
@@ -517,7 +516,7 @@ public class MainMenu {
             System.out.print("Enter the drug ID you want to remove: ");
             int id = intScanner.nextInt();
             try {
-                MyFile.remove(Manager.getDrugByID(id));
+                ClinicFile.remove(Manager.getDrugByID(id));
             } catch (Exception e) {
                 System.out.println("There is no drug with this ID! please  check and try again.");
                 System.out.println("1: Back");
@@ -537,7 +536,8 @@ public class MainMenu {
             System.out.println("2: Paying nurses' salaries");
             System.out.println("3: Paying employees' salaries");
             System.out.println("4: Paying protections' salaries");
-            System.out.println("5: Back");
+            System.out.println("5: Edit");
+            System.out.println("6: Back");
             String chose;
             while (true) {
                 chose = scanner.nextLine();
@@ -555,10 +555,152 @@ public class MainMenu {
                         payingProtectionsSalaries();
                         break;
                     case "5":
+                        edit();
+                        break;
+                    case "6":
                         managerOptions();
                     default:
                         System.out.println("Invalid input");
                 }
+            }
+        }
+
+        private static void edit() {
+            System.out.println("1: Edit the cost of a doctor's visit");
+            System.out.println("2: Edit the basic salary of a nurse");
+            System.out.println("3: Edit the basic salary of a employee");
+            System.out.println("4: Edit the basic salary of a protection");
+            System.out.println("5: Back");
+
+            String chose;
+            while (true) {
+                chose = scanner.nextLine();
+                switch (chose) {
+                    case "1":
+                        editDoctorSFee();
+                        break;
+                    case "2":
+                        editNurseSBaseSalary();
+                        break;
+                    case "3":
+                        editEmployeeSBaseSalary();
+                        break;
+                    case "4":
+                        editProtectionSBaseSalary();
+                        break;
+                    case "5":
+                        payment();
+                    default:
+                        System.out.println("Invalid input!");
+                }
+            }
+        }
+
+        private static void editDoctorSFee() {
+            Manager.showDoctors();
+
+            try {
+                int doctorId = intScanner.nextInt();
+                Doctor doctor = Manager.getDoctorByID(doctorId);
+                System.out.println("Current fee : " + (doctor.getFee()));
+                System.out.print("Enter the new fee: ");
+                int fee = intScanner.nextInt();
+                doctor.setFee(fee);
+                ClinicFile.writeDoctor();
+                System.out.println("Changes saved successfully");
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input!");
+            } catch (Exception e) {
+            }
+
+            while (true){
+                System.out.print("1: Back");
+                String back = scanner.nextLine();
+                if (back.equals("1"))
+                    edit();
+                else
+                    System.out.println("Invalid input");
+            }
+        }
+
+        private static void editNurseSBaseSalary() {
+            Manager.showNurses();
+
+            try {
+                int nurseId = intScanner.nextInt();
+                Nurse nurse = Manager.getNurseByID(nurseId);
+                System.out.println("Current base salary: " + (nurse.getBaseSalary()));
+                System.out.print("Enter the new base salary: ");
+                int baseSalary = intScanner.nextInt();
+                nurse.setBaseSalary(baseSalary);
+                ClinicFile.writeNurse();
+                System.out.println("Changes saved successfully");
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input!");
+            } catch (Exception e) {
+            }
+
+            while (true){
+                System.out.print("1: Back");
+                String back = scanner.nextLine();
+                if (back.equals("1"))
+                    edit();
+                else
+                    System.out.println("Invalid input");
+            }
+        }
+
+        private static void editEmployeeSBaseSalary() {
+            Manager.showEmployee();
+
+            try {
+                int employeeId = intScanner.nextInt();
+                Employee employee = Manager.getEmployeeByID(employeeId);
+                System.out.println("Current base salary: " + (employee.getBaseSalary()));
+                System.out.print("Enter the new base salary: ");
+                int baseSalary = intScanner.nextInt();
+                employee.setBaseSalary(baseSalary);
+                ClinicFile.writeEmployee();
+                System.out.println("Changes saved successfully");
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input!");
+            } catch (Exception e) {
+            }
+
+            while (true){
+                System.out.print("1: Back");
+                String back = scanner.nextLine();
+                if (back.equals("1"))
+                    edit();
+                else
+                    System.out.println("Invalid input");
+            }
+        }
+
+        private static void editProtectionSBaseSalary() {
+            Manager.showProtection();
+
+            try {
+                int protectionId = intScanner.nextInt();
+                Protection protection = Manager.getProtectionByID(protectionId);
+                System.out.println("Current base salary: " + (protection.getBaseSalary()));
+                System.out.print("Enter the new base salary: ");
+                int baseSalary = intScanner.nextInt();
+                protection.setBaseSalary(baseSalary);
+                ClinicFile.writeProtection();
+                System.out.println("Changes saved successfully");
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input!");
+            } catch (Exception e) {
+            }
+
+            while (true){
+                System.out.print("1: Back");
+                String back = scanner.nextLine();
+                if (back.equals("1"))
+                    edit();
+                else
+                    System.out.println("Invalid input");
             }
         }
 
@@ -569,8 +711,8 @@ public class MainMenu {
             int id = intScanner.nextInt();
             try {
                 Manager.paymentDoctorsClaim(Manager.getDoctorByID(id));
-                MyFile.writeDoctor();
-                MyFile.writeBalance();
+                ClinicFile.writeDoctor();
+                ClinicFile.writeBalance();
             } catch (Exception e) {
                 System.out.println("1: Back");
                 while (true) {
@@ -594,8 +736,8 @@ public class MainMenu {
             try {
                 Manager.registrationOfPersonnelOvertime(Manager.getNurseByID(id), overtime);
                 Manager.payPersonnelSalary(Manager.getNurseByID(id));
-                MyFile.writeNurse();
-                MyFile.writeBalance();
+                ClinicFile.writeNurse();
+                ClinicFile.writeBalance();
             } catch (Exception e) {
                 System.out.println("1: Back");
                 while (true) {
@@ -619,8 +761,8 @@ public class MainMenu {
             try {
                 Manager.registrationOfPersonnelOvertime(Manager.getEmployeeByID(id), overtime);
                 Manager.payPersonnelSalary(Manager.getEmployeeByID(id));
-                MyFile.writeEmployee();
-                MyFile.writeBalance();
+                ClinicFile.writeEmployee();
+                ClinicFile.writeBalance();
             } catch (Exception e) {
                 System.out.println("1: Back");
                 while (true) {
@@ -644,8 +786,8 @@ public class MainMenu {
             try {
                 Manager.registrationOfPersonnelOvertime(Manager.getProtectionByID(id), overtime);
                 Manager.payPersonnelSalary(Manager.getProtectionByID(id));
-                MyFile.writeProtection();
-                MyFile.writeBalance();
+                ClinicFile.writeProtection();
+                ClinicFile.writeBalance();
             } catch (Exception e) {
                 System.out.println("1: Back");
                 while (true) {
@@ -689,7 +831,7 @@ public class MainMenu {
             String password = scanner.nextLine();
 
             boolean check = false;
-            for (Doctor doctor1 : Clinic.doctors) {
+            for (Doctor doctor1 : ClinicFile.doctors) {
                 if (doctor1.getUserName().equals(username) && doctor1.getPassWord().equals(password)) {
                     doctor = doctor1;
                     check = true;
@@ -759,7 +901,7 @@ public class MainMenu {
             System.out.print("Enter the visit's id: ");
             int visitId = intScanner.nextInt();
 
-            for (Drug drug : Clinic.drugs) {
+            for (Drug drug : ClinicFile.drugs) {
                 try {
                     if (drug.getExpertise().equals(doctor.getExpertise()))
                         System.out.println(drug);
@@ -773,21 +915,51 @@ public class MainMenu {
                 if (drugId == 0)
                     break;
                 try {
-                   doctor.visiting(visitId, Manager.getDrugByID(drugId));
+                    doctor.visiting(visitId, Manager.getDrugByID(drugId));
                 } catch (Exception e) {
                 }
             }
             try {
                 doctor.completeVisiting();
-                MyFile.writeDoctor();
-                MyFile.writeVisit();
-                MyFile.writePatient();
-                MyFile.writeBalance();
+                ClinicFile.writeDoctor();
+                ClinicFile.writeVisit();
+                ClinicFile.writePatient();
+                ClinicFile.writeBalance();
             } catch (Exception e) {
             }
         }
 
         private static void edit() {
+            System.out.print("Enter your new address: ");
+            String address = scanner.nextLine();
+
+            System.out.println("phone number");
+            String phoneNumber = scanner.nextLine();
+
+            System.out.println("username");
+            String username = scanner.nextLine();
+
+            System.out.println("password");
+            String password = scanner.nextLine();
+
+            doctor.setAddress(address);
+            doctor.setPhoneNumber(phoneNumber);
+            doctor.setUserName(username);
+            doctor.setPassWord(password);
+
+            ClinicFile.writeDoctor();
+
+            System.out.println("Changes saved successfully");
+
+            System.out.println("1: Back");
+            String back;
+            while (true) {
+                back = scanner.nextLine();
+                if (back.equals("1"))
+                    doctorMenu();
+                else
+                    System.out.println("Invalid input!");
+            }
         }
     }
 
@@ -810,4 +982,5 @@ public class MainMenu {
         public static void main() {
         }
     }
+
 }

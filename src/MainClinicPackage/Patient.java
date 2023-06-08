@@ -13,7 +13,7 @@ public class Patient extends Person {
         super(fullName, age, address, phoneNumber, userName, passWord);
         this.patientID = patient_ID++;
         this.visits= new ArrayList<>();
-        Clinic.patients.add(this);
+        ClinicFile.patients.add(this);
     }
 
     public int getPatientID() {
@@ -25,7 +25,7 @@ public class Patient extends Person {
         var visit = new Visit(doctor, this);
         visits.add(visit);
         doctor.addVisit(visit);
-        Clinic.visits.add(visit);
+        ClinicFile.visits.add(visit);
     }
 
     public void showCompleteVisits() {
@@ -43,7 +43,7 @@ public class Patient extends Person {
     }
 
     public void save() {
-        MyFile.save(this);
+        ClinicFile.save(this);
     }
 
     @Override

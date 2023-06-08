@@ -3,8 +3,7 @@ package MainClinicPackage;
 import java.io.*;
 import java.util.ArrayList;
 
-public class MyFile {
-    //C:\Users\LENOVO\OneDrive\Desktop\BestClinic\files
+public abstract class ClinicFile {
     private static String doctorPath = "C:\\Users\\LENOVO\\OneDrive\\Desktop\\BestClinic\\files\\doctor.txt";
     private static String patientPath = "C:\\Users\\LENOVO\\OneDrive\\Desktop\\BestClinic\\files\\patient.txt";
     private static String nursePath = "C:\\Users\\LENOVO\\OneDrive\\Desktop\\BestClinic\\files\\nurse.txt";
@@ -14,7 +13,7 @@ public class MyFile {
     private static String visitPath = "C:\\Users\\LENOVO\\OneDrive\\Desktop\\BestClinic\\files\\visit.txt";
     private static String balancePath = "C:\\Users\\LENOVO\\OneDrive\\Desktop\\BestClinic\\files\\balance.txt";
 
-
+    public static double balance = 9_999_999;
     public static ArrayList<Doctor> doctors = new ArrayList();
     public static ArrayList<Patient> patients = new ArrayList();
     public static ArrayList<Nurse> nurses = new ArrayList();
@@ -22,9 +21,14 @@ public class MyFile {
     public static ArrayList<Protection> protections = new ArrayList();
     public static ArrayList<Drug> drugs = new ArrayList();
     public static ArrayList<Visit> visits = new ArrayList();
-    public static long balance;
 
     public static void writeBalance() {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(balancePath))) {
+            String balanceTemp = Double.toString(balance);
+            bufferedWriter.write(balanceTemp);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }/**/
 
     public static void writeDoctor() {
@@ -97,7 +101,18 @@ public class MyFile {
         }
     }
 
-    public static void readBalance() {}/**/
+    public static void readBalance() {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(balancePath))) {
+            String balance = bufferedReader.readLine();
+            ClinicFile.balance = Double.parseDouble(balance);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void readDoctors() {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(doctorPath))) {
             while (true) {

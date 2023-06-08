@@ -1,19 +1,17 @@
 package MainClinicPackage;
 
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
-        MyFile.readDoctors();
-        MyFile.readPatients();
-        MyFile.readNurses();
-        MyFile.readEmployees();
-        MyFile.readProtections();
-        MyFile.readVisits();
-        MyFile.readDrugs();
-        Clinic.balance = MyFile.balance;
+        ClinicFile.writeBalance();
+        ClinicFile.readDoctors();
+        ClinicFile.readPatients();
+        ClinicFile.readNurses();
+        ClinicFile.readEmployees();
+        ClinicFile.readProtections();
+        ClinicFile.readVisits();
+        ClinicFile.readDrugs();
+        ClinicFile.readBalance();
 
 //        Clinic.doctors = MyFile.doctors;
 //        Clinic.patients = MyFile.patients;

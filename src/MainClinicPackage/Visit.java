@@ -56,7 +56,7 @@ public class Visit implements Serializable {
     }
 
     public void save() {
-        MyFile.save(this);
+        ClinicFile.save(this);
     }
     @Override
     public String toString() {

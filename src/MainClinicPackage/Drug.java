@@ -31,7 +31,7 @@ public class Drug implements Serializable {
     }
 
     public void save() {
-        MyFile.save(this);
+        ClinicFile.save(this);
     }
 
     @Override

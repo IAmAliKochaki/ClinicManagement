@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Doctor extends Person {
-    public static List expertises = Arrays.asList("cosmetic_dermatologists", "cardiologist", "general_practitioner", "gynecologist", "internist", "ophthalmologist", "pediatrician", "psychiatrist");
     private String expertise;
     public static int doctor_ID = 1;
     private int doctorID;
@@ -116,8 +115,6 @@ public class Doctor extends Person {
                 " , age: " + age +
                 " , address: '" + address + '\'' +
                 " , phoneNumber: " + phoneNumber +
-                " , userName: '" + userName + '\'' +
-                " , passWord: '" + passWord + '\'' +
                 '}';
     }
 

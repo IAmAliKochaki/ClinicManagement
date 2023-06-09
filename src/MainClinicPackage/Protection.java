@@ -28,8 +28,6 @@ public class Protection extends Personnel {
                 ", protectionID: " + protectionID +
                 ", address: '" + address + '\'' +
                 ", phoneNumber: " + phoneNumber +
-                ", userName: '" + userName + '\'' +
-                ", passWord: '" + passWord + '\'' +
                 '}';
     }
 }

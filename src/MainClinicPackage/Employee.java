@@ -39,8 +39,6 @@ public class Employee extends Personnel {
                 ", employeeID: " + employeeID +
                 ", address: '" + address + '\'' +
                 ", phoneNumber: " + phoneNumber +
-                ", userName: '" + userName + '\'' +
-                ", passWord: '" + passWord + '\'' +
                 '}';
     }
 }

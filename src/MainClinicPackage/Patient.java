@@ -13,7 +13,6 @@ public class Patient extends Person {
         super(fullName, age, address, phoneNumber, userName, passWord);
         this.patientID = patient_ID++;
         this.visits= new ArrayList<>();
-        ClinicFile.patients.add(this);
     }
 
     public int getPatientID() {
@@ -53,8 +52,6 @@ public class Patient extends Person {
                 " , age: " + age +
                 " , address: '" + address + '\'' +
                 " , phoneNumber: " + phoneNumber +
-                " , userName: '" + userName + '\'' +
-                " , passWord: '" + passWord + '\'' +
                 " , patientID: " + patientID +
                 '}';
     }

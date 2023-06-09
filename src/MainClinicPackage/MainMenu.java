@@ -53,9 +53,9 @@ public class MainMenu {
     private static abstract class ManagerMenu {
         //manager login
         public static void main() {
-            System.out.println("Enter your username: ");
+            System.out.print("Enter your username: ");
             String username = scanner.nextLine();
-            System.out.println("Enter your password: ");
+            System.out.print("Enter your password: ");
             String password = scanner.nextLine();
             if (!(Manager.username.equals(username) && Manager.password.equals(password))) {
                 System.out.println("the information is incorrect!");
@@ -105,7 +105,8 @@ public class MainMenu {
             System.out.println("6: Show drugs");
             System.out.println("7: Show complete visits");
             System.out.println("8: Show incomplete visits");
-            System.out.println("9: Back");
+            System.out.println("9: Show clinic inventory");
+            System.out.println("10: Back");
             Boolean breaked = false;
             while (true) {
                 String show = scanner.nextLine();
@@ -143,6 +144,10 @@ public class MainMenu {
                         breaked = true;
                         break;
                     case "9":
+                        System.out.println(ClinicFile.balance);
+                        breaked = true;
+                        break;
+                    case "10":
                         managerOptions();
                     default:
                         System.out.println("Invalid input!");
@@ -278,14 +283,24 @@ public class MainMenu {
             System.out.print("Nurse's phone number: ");
             String phoneNumber = scanner.nextLine();
 
-            System.out.print("Username");
+            System.out.print("Username: ");
             String userName = scanner.nextLine();
 
-            System.out.print("Password");
+            System.out.print("Password: ");
             String passWord = scanner.nextLine();
 
             Nurse nurse = new Nurse(name, age, address, phoneNumber, userName, passWord, baseSalary);
             nurse.save();
+            System.out.println("Nurse added successfully");
+
+            while (true) {
+                System.out.println("1: Back");
+                String back = scanner.nextLine();
+                if (back.equals("1"))
+                    addOptions();
+                else
+                    System.out.println("Invalid input!");
+            }
         }
 
         private static void addEmployee() {
@@ -315,6 +330,16 @@ public class MainMenu {
 
             Employee employee = new Employee(name, position, age, address, phoneNumber, userName, passWord, baseSalary);
             employee.save();
+            System.out.println("Employee added successfully");
+
+            while (true) {
+                System.out.println("1: Back");
+                String back = scanner.nextLine();
+                if (back.equals("1"))
+                    addOptions();
+                else
+                    System.out.println("Invalid input!");
+            }
         }
 
         private static void addProtection() {
@@ -342,6 +367,16 @@ public class MainMenu {
 
             Protection protection = new Protection(name, age, address, phoneNumber, userName, passWord, baseSalary);
             protection.save();
+            System.out.println("Protection added successfully");
+
+            while (true) {
+                System.out.println("1: Back");
+                String back = scanner.nextLine();
+                if (back.equals("1"))
+                    addOptions();
+                else
+                    System.out.println("Invalid input!");
+            }
         }
 
         private static void addDrug() {
@@ -365,6 +400,16 @@ public class MainMenu {
 
             Drug drug = new Drug(name, expertise, company, makeDate, expireDate, description);
             drug.save();
+            System.out.println("Drug added successfully");
+
+            while (true) {
+                System.out.println("1: Back");
+                String back = scanner.nextLine();
+                if (back.equals("1"))
+                    addOptions();
+                else
+                    System.out.println("Invalid input!");
+            }
         }
 
         //The manager remove option such as doctor , patient and ...
@@ -417,16 +462,16 @@ public class MainMenu {
             int id = intScanner.nextInt();
             try {
                 ClinicFile.remove(Manager.getDoctorByID(id));
+                System.out.println("The doctor successfully");
             } catch (Exception e) {
-                System.out.println("There is no doctor with this ID! please  check and try again.");
-                System.out.println("1: Back");
-                while (true) {
-                    String back = scanner.nextLine();
-                    if (back.equals("1"))
-                        removeOptions();
-                    else
-                        System.out.println("Invalid input!");
-                }
+            }
+            System.out.println("1: Back");
+            while (true) {
+                String back = scanner.nextLine();
+                if (back.equals("1"))
+                    removeOptions();
+                else
+                    System.out.println("Invalid input!");
             }
         }
 
@@ -437,16 +482,16 @@ public class MainMenu {
             int id = intScanner.nextInt();
             try {
                 ClinicFile.remove(Manager.getPatientByID(id));
+                System.out.println("The patient remove successfully");
             } catch (Exception e) {
-                System.out.println("There is no patient with this ID! please  check and try again.");
-                System.out.println("1: Back");
-                while (true) {
-                    String back = scanner.nextLine();
-                    if (back.equals("1"))
-                        removeOptions();
-                    else
-                        System.out.println("Invalid input!");
-                }
+            }
+            System.out.println("1: Back");
+            while (true) {
+                String back = scanner.nextLine();
+                if (back.equals("1"))
+                    removeOptions();
+                else
+                    System.out.println("Invalid input!");
             }
         }
 
@@ -457,16 +502,16 @@ public class MainMenu {
             int id = intScanner.nextInt();
             try {
                 ClinicFile.remove(Manager.getNurseByID(id));
+                System.out.println("The nurse remove successfully");
             } catch (Exception e) {
-                System.out.println("There is no nurse with this ID! please  check and try again.");
-                System.out.println("1: Back");
-                while (true) {
-                    String back = scanner.nextLine();
-                    if (back.equals("1"))
-                        removeOptions();
-                    else
-                        System.out.println("Invalid input!");
-                }
+            }
+            System.out.println("1: Back");
+            while (true) {
+                String back = scanner.nextLine();
+                if (back.equals("1"))
+                    removeOptions();
+                else
+                    System.out.println("Invalid input!");
             }
         }
 
@@ -477,16 +522,16 @@ public class MainMenu {
             int id = intScanner.nextInt();
             try {
                 ClinicFile.remove(Manager.getEmployeeByID(id));
+                System.out.println("The employee remove successfully");
             } catch (Exception e) {
-                System.out.println("There is no employee with this ID! please  check and try again.");
-                System.out.println("1: Back");
-                while (true) {
-                    String back = scanner.nextLine();
-                    if (back.equals("1"))
-                        removeOptions();
-                    else
-                        System.out.println("Invalid input!");
-                }
+            }
+            System.out.println("1: Back");
+            while (true) {
+                String back = scanner.nextLine();
+                if (back.equals("1"))
+                    removeOptions();
+                else
+                    System.out.println("Invalid input!");
             }
         }
 
@@ -497,16 +542,16 @@ public class MainMenu {
             int id = intScanner.nextInt();
             try {
                 ClinicFile.remove(Manager.getProtectionByID(id));
+                System.out.println("The protection remove successfully");
             } catch (Exception e) {
-                System.out.println("There is no employee with this ID! please  check and try again.");
-                System.out.println("1: Back");
-                while (true) {
-                    String back = scanner.nextLine();
-                    if (back.equals("1"))
-                        removeOptions();
-                    else
-                        System.out.println("Invalid input!");
-                }
+            }
+            System.out.println("1: Back");
+            while (true) {
+                String back = scanner.nextLine();
+                if (back.equals("1"))
+                    removeOptions();
+                else
+                    System.out.println("Invalid input!");
             }
         }
 
@@ -517,16 +562,16 @@ public class MainMenu {
             int id = intScanner.nextInt();
             try {
                 ClinicFile.remove(Manager.getDrugByID(id));
+                System.out.println("The drug remove successfully");
             } catch (Exception e) {
-                System.out.println("There is no drug with this ID! please  check and try again.");
-                System.out.println("1: Back");
-                while (true) {
-                    String back = scanner.nextLine();
-                    if (back.equals("1"))
-                        removeOptions();
-                    else
-                        System.out.println("Invalid input!");
-                }
+            }
+            System.out.println("1: Back");
+            while (true) {
+                String back = scanner.nextLine();
+                if (back.equals("1"))
+                    removeOptions();
+                else
+                    System.out.println("Invalid input!");
             }
         }
 
@@ -907,22 +952,34 @@ public class MainMenu {
 
             System.out.println("Enter the drug ID you want to add to the prescription (enter 0 to end):");
             int drugId;
+            boolean visit = false;
             while (true) {
                 drugId = intScanner.nextInt();
                 if (drugId == 0)
                     break;
                 try {
                     doctor.visiting(visitId, Manager.getDrugByID(drugId));
+                    visit = true;
                 } catch (Exception e) {
                 }
             }
-            try {
+            if (visit){
                 doctor.completeVisiting();
                 ClinicFile.writeDoctor();
                 ClinicFile.writeVisit();
                 ClinicFile.writePatient();
                 ClinicFile.writeBalance();
-            } catch (Exception e) {
+                System.out.println("The visit is complete");
+            }
+
+            System.out.println("1: Back");
+            String back;
+            while (true){
+                back = scanner.nextLine();
+                if (back.equals("1"))
+                    doctorMenu();
+                    else
+                System.out.println("Invalid input!");
             }
         }
 
@@ -1022,10 +1079,10 @@ public class MainMenu {
             System.out.print("Enter your phone number: ");
             String phoneNumber = scanner.nextLine();
 
-            System.out.print("Username");
+            System.out.print("Username: ");
             String userName = scanner.nextLine();
 
-            System.out.print("Password");
+            System.out.print("Password: ");
             String passWord = scanner.nextLine();
 
             Patient patient = new Patient(name, age, address, phoneNumber, userName, passWord);
@@ -1081,15 +1138,14 @@ public class MainMenu {
             }
             if (!available) {
                 System.out.println("There is no doctor with this specialty!");
-            }
-            else {
+            } else {
                 System.out.println("Enter the doctor ID you want");
                 int doctorId = intScanner.nextInt();
                 try {
                     Doctor doctor = Manager.getDoctorByID(doctorId);
                     System.out.println("Describe your illness: ");
                     String descriptio = scanner.nextLine();
-                    patient.applyVisit(doctor , descriptio);
+                    patient.applyVisit(doctor, descriptio);
                     ClinicFile.writePatient();
                     ClinicFile.writeDoctor();
                     System.out.println("Your request has been successfully saved");
@@ -1115,10 +1171,10 @@ public class MainMenu {
             System.out.println("phone number");
             String phoneNumber = scanner.nextLine();
 
-            System.out.println("username");
+            System.out.println("username: ");
             String username = scanner.nextLine();
 
-            System.out.println("password");
+            System.out.println("password: ");
             String password = scanner.nextLine();
 
             patient.setAddress(address);

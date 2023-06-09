@@ -28,8 +28,6 @@ public class Nurse extends Personnel {
                 ", nurseID: " + nurseID +
                 ", address: '" + address + '\'' +
                 ", phoneNumber: " + phoneNumber +
-                ", userName: '" + userName + '\'' +
-                ", passWord: '" + passWord + '\'' +
                 '}';
     }
 }

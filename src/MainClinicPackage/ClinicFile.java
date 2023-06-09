@@ -12,8 +12,7 @@ public abstract class ClinicFile {
     private static String drugPath = "C:\\Users\\LENOVO\\OneDrive\\Desktop\\BestClinic\\files\\drug.txt";
     private static String visitPath = "C:\\Users\\LENOVO\\OneDrive\\Desktop\\BestClinic\\files\\visit.txt";
     private static String balancePath = "C:\\Users\\LENOVO\\OneDrive\\Desktop\\BestClinic\\files\\balance.txt";
-
-    public static double balance = 9_999_999;
+    public static double balance = 9_000_000;
     public static ArrayList<Doctor> doctors = new ArrayList();
     public static ArrayList<Patient> patients = new ArrayList();
     public static ArrayList<Nurse> nurses = new ArrayList();
@@ -29,7 +28,7 @@ public abstract class ClinicFile {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }/**/
+    }
 
     public static void writeDoctor() {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(doctorPath))) {
@@ -119,6 +118,7 @@ public abstract class ClinicFile {
                 Doctor doctor = (Doctor) in.readObject();
                 doctors.add(doctor);
             }
+        } catch (EOFException e) {
         } catch (IOException | ClassNotFoundException ex) {
             ex.printStackTrace();
         } finally {
@@ -136,6 +136,7 @@ public abstract class ClinicFile {
                 Patient patient = (Patient) in.readObject();
                 patients.add(patient);
             }
+        } catch (EOFException e) {
         } catch (IOException | ClassNotFoundException ex) {
             ex.printStackTrace();
         } finally {
@@ -152,6 +153,7 @@ public abstract class ClinicFile {
                 Nurse nurse = (Nurse) in.readObject();
                 nurses.add(nurse);
             }
+        } catch (EOFException e) {
         } catch (IOException | ClassNotFoundException ex) {
             ex.printStackTrace();
         } finally {
@@ -168,6 +170,7 @@ public abstract class ClinicFile {
                 Employee employee = (Employee) in.readObject();
                 employees.add(employee);
             }
+        } catch (EOFException e) {
         } catch (IOException | ClassNotFoundException ex) {
             ex.printStackTrace();
         } finally {
@@ -184,6 +187,7 @@ public abstract class ClinicFile {
                 Protection protection = (Protection) in.readObject();
                 protections.add(protection);
             }
+        } catch (EOFException e) {
         } catch (IOException | ClassNotFoundException ex) {
             ex.printStackTrace();
         } finally {
@@ -200,6 +204,7 @@ public abstract class ClinicFile {
                 Drug drug = (Drug) in.readObject();
                 drugs.add(drug);
             }
+        } catch (EOFException e) {
         } catch (IOException | ClassNotFoundException ex) {
             ex.printStackTrace();
         } finally {
@@ -216,6 +221,7 @@ public abstract class ClinicFile {
                 Visit visit = (Visit) in.readObject();
                 visits.add(visit);
             }
+        } catch (EOFException e) {
         } catch (IOException | ClassNotFoundException ex) {
             ex.printStackTrace();
         } finally {
@@ -291,3 +297,5 @@ public abstract class ClinicFile {
         writeDrug();
     }
 }
+
+

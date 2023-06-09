@@ -8,8 +8,8 @@ public abstract class Manager {
     public static int age = 20;
     public static String address = "qaemshahr";
     public static String phoneNumber = "09368212956";
-    public static String username = "ali1382";
-    public static String password = "043018";
+    public static String username = "ali";
+    public static String password = "043";
 
     public static void showDoctors() {
         for (Doctor doctor : ClinicFile.doctors) {
@@ -90,7 +90,7 @@ public abstract class Manager {
             }
         }
         if (targetDoctor == null)
-            throw new Exception("There is no doctor with this ID! please  check and try again.");
+            throw new Exception("There is no doctor with this ID! please check and try again.");
         return targetDoctor;
     }
 
@@ -103,7 +103,7 @@ public abstract class Manager {
             }
         }
         if (targetPatient == null)
-            throw new Exception("There is no patient with this ID! please  check and try again.");
+            throw new Exception("There is no patient with this ID! please check and try again.");
         return targetPatient;
     }
 
@@ -116,7 +116,7 @@ public abstract class Manager {
             }
         }
         if (targetDrug == null)
-            throw new Exception("There is no drug with this ID! please  check and try again.");
+            throw new Exception("There is no drug with this ID! please check and try again.");
         return targetDrug;
     }
 
@@ -129,7 +129,7 @@ public abstract class Manager {
             }
         }
         if (targetNurse == null)
-            throw new Exception("There is no nurse with this ID! please  check and try again.");
+            throw new Exception("There is no nurse with this ID! please check and try again.");
         return targetNurse;
     }
 
@@ -142,7 +142,7 @@ public abstract class Manager {
             }
         }
         if (targetEmployee == null)
-            throw new Exception("There is no employee with this ID! please  check and try again.");
+            throw new Exception("There is no employee with this ID! please check and try again.");
         return targetEmployee;
     }
 
@@ -155,7 +155,7 @@ public abstract class Manager {
             }
         }
         if (targetProtection == null)
-            throw new Exception("There is no protection with this ID! please  check and try again.");
+            throw new Exception("There is no protection with this ID! please check and try again.");
         return targetProtection;
     }
 

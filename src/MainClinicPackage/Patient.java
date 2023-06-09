@@ -20,9 +20,9 @@ public class Patient extends Person {
         return patientID;
     }
 
-    public void applyVisit(Doctor doctor) {
+    public void applyVisit(Doctor doctor , String description) {
         //add the incomplete visit to patient's , doctor's and clinic's incomplete visit list
-        var visit = new Visit(doctor, this);
+        var visit = new Visit(doctor, this , description);
         visits.add(visit);
         doctor.addVisit(visit);
         ClinicFile.visits.add(visit);

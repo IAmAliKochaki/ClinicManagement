@@ -613,7 +613,7 @@ public class MainMenu {
             } catch (Exception e) {
             }
 
-            while (true){
+            while (true) {
                 System.out.print("1: Back");
                 String back = scanner.nextLine();
                 if (back.equals("1"))
@@ -640,7 +640,7 @@ public class MainMenu {
             } catch (Exception e) {
             }
 
-            while (true){
+            while (true) {
                 System.out.print("1: Back");
                 String back = scanner.nextLine();
                 if (back.equals("1"))
@@ -667,7 +667,7 @@ public class MainMenu {
             } catch (Exception e) {
             }
 
-            while (true){
+            while (true) {
                 System.out.print("1: Back");
                 String back = scanner.nextLine();
                 if (back.equals("1"))
@@ -694,7 +694,7 @@ public class MainMenu {
             } catch (Exception e) {
             }
 
-            while (true){
+            while (true) {
                 System.out.print("1: Back");
                 String back = scanner.nextLine();
                 if (back.equals("1"))
@@ -802,7 +802,7 @@ public class MainMenu {
     }
 
     private static abstract class DoctorMenu {
-        private static Doctor doctor;
+        private static Doctor doctor = null;
 
         public static void main() {
             System.out.println("1: Login");
@@ -834,14 +834,13 @@ public class MainMenu {
             for (Doctor doctor1 : ClinicFile.doctors) {
                 if (doctor1.getUserName().equals(username) && doctor1.getPassWord().equals(password)) {
                     doctor = doctor1;
-                    check = true;
                     break;
                 }
             }
-            if (check)
+            if (doctor != null)
                 doctorMenu();
             else {
-                System.out.println("the information is incorrect!");
+                System.out.println("There is no doctor with this information or the information is incorrect!");
                 main();
             }
 
@@ -902,12 +901,10 @@ public class MainMenu {
             int visitId = intScanner.nextInt();
 
             for (Drug drug : ClinicFile.drugs) {
-                try {
-                    if (drug.getExpertise().equals(doctor.getExpertise()))
-                        System.out.println(drug);
-                } catch (Exception e) {
-                }
+                if (drug.getExpertise().equals(doctor.getExpertise()))
+                    System.out.println(drug);
             }
+
             System.out.println("Enter the drug ID you want to add to the prescription (enter 0 to end):");
             int drugId;
             while (true) {
@@ -964,7 +961,184 @@ public class MainMenu {
     }
 
     private static abstract class PatientMenu {
+        private static Patient patient = null;
+
         public static void main() {
+            System.out.println("1: Login");
+            System.out.println("2: Sign up");
+            System.out.println("3: Back");
+
+            String start;
+            while (true) {
+                start = scanner.nextLine();
+
+                switch (start) {
+                    case "1":
+                        login();
+                        break;
+                    case "2":
+                        signUp();
+                        break;
+                    case "3":
+                        MainMenu.main();
+                    default:
+                        System.out.println("Invalid input!");
+                }
+            }
+        }
+
+        private static void login() {
+            System.out.print("Username: ");
+            String username = scanner.nextLine();
+
+            System.out.print("Password: ");
+            String password = scanner.nextLine();
+
+            for (Patient patientTemp : ClinicFile.patients) {
+                if (patientTemp.getUserName().equals(username) && patientTemp.getPassWord().equals(password)) {
+                    patient = patientTemp;
+                    break;
+                }
+            }
+
+            if (patient != null)
+                patientMenu();
+            else {
+                System.out.println("There is no patient with this information or the information is incorrect!");
+                main();
+            }
+        }
+
+        private static void signUp() {
+            System.out.print("Enter your full name: ");
+            String name = scanner.nextLine();
+
+            System.out.print("Enter your age: ");
+            int age = intScanner.nextInt();
+
+            System.out.print("Enter your address: ");
+            String address = scanner.nextLine();
+
+            System.out.print("Enter your phone number: ");
+            String phoneNumber = scanner.nextLine();
+
+            System.out.print("Username");
+            String userName = scanner.nextLine();
+
+            System.out.print("Password");
+            String passWord = scanner.nextLine();
+
+            Patient patient = new Patient(name, age, address, phoneNumber, userName, passWord);
+            patient.save();
+            System.out.println("Successfully");
+            patientMenu();
+        }
+
+        private static void patientMenu() {
+            System.out.println("1: Request a visit");
+            System.out.println("2: Show complete visits");
+            System.out.println("3: Show incomplete visits");
+            System.out.println("4: Edit");
+            System.out.println("5: Back");
+
+            String chose;
+            while (true) {
+                chose = scanner.nextLine();
+                switch (chose) {
+                    case "1":
+                        requestVisit();
+                        break;
+                    case "2":
+                        patient.showCompleteVisits();
+                        patientMenu();
+                        break;
+                    case "3":
+                        patient.showInCompleteVisits();
+                        patientMenu();
+                        break;
+                    case "4":
+                        edit();
+                        break;
+                    case "5":
+                        main();
+                        break;
+                    default:
+                        System.out.println("Invalid input");
+                }
+            }
+        }
+
+        private static void requestVisit() {
+            System.out.print("Enter the required expertise: ");
+            String expertise = scanner.nextLine();
+
+            boolean available = false;
+            for (Doctor doctor : ClinicFile.doctors) {
+                if (doctor.getExpertise().equals(expertise)) {
+                    System.out.println(doctor);
+                    available = true;
+                }
+            }
+            if (!available) {
+                System.out.println("There is no doctor with this specialty!");
+            }
+            else {
+                System.out.println("Enter the doctor ID you want");
+                int doctorId = intScanner.nextInt();
+                try {
+                    Doctor doctor = Manager.getDoctorByID(doctorId);
+                    System.out.println("Describe your illness: ");
+                    String descriptio = scanner.nextLine();
+                    patient.applyVisit(doctor , descriptio);
+                    ClinicFile.writePatient();
+                    ClinicFile.writeDoctor();
+                    System.out.println("Your request has been successfully saved");
+                } catch (Exception e) {
+                }
+            }
+
+            System.out.println("1: Back");
+            String back;
+            while (true) {
+                back = scanner.nextLine();
+                if (back.equals("1"))
+                    patientMenu();
+                else
+                    System.out.println("Invalid input!");
+            }
+        }
+
+        private static void edit() {
+            System.out.print("Enter your new address: ");
+            String address = scanner.nextLine();
+
+            System.out.println("phone number");
+            String phoneNumber = scanner.nextLine();
+
+            System.out.println("username");
+            String username = scanner.nextLine();
+
+            System.out.println("password");
+            String password = scanner.nextLine();
+
+            patient.setAddress(address);
+            patient.setPhoneNumber(phoneNumber);
+            patient.setUserName(username);
+            patient.setPassWord(password);
+
+            ClinicFile.writePatient();
+
+            System.out.println("Changes saved successfully");
+
+            System.out.println("1: Back");
+            String back;
+            while (true) {
+                back = scanner.nextLine();
+                if (back.equals("1"))
+                    patientMenu();
+                else
+                    System.out.println("Invalid input!");
+            }
         }
     }
 

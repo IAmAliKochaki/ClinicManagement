@@ -13,14 +13,16 @@ public class Visit implements Serializable {
     private Date applyDate;
     private Date completeDate;
     private Boolean checked;
+    private String description;
 
-    public Visit(Doctor doctor, Patient patient) {
+    public Visit(Doctor doctor, Patient patient, String description) {
         this.doctor = doctor;
         this.patient = patient;
         this.visitID = visit_ID++;
         this.applyDate = new Date();
         this.checked = false;
         this.prescription = new ArrayList<>();
+        this.description = description;
     }
 
     public void setChecked(Boolean checked) {
@@ -44,26 +46,28 @@ public class Visit implements Serializable {
     }
 
     //when the doctor check the visit and complete the prescription use this method
-    public void complete(){
+    public void complete() {
         this.checked = true;
-        this.completeDate =  new Date();
+        this.completeDate = new Date();
         doctor.addVisit(this); //add complete visit to doctor's list and clinic's list
     }
 
     //add drug to prescription
-    public void completePrescription(Drug drug){
+    public void completePrescription(Drug drug) {
         prescription.add((Drug) drug);
     }
 
     public void save() {
         ClinicFile.save(this);
     }
+
     @Override
     public String toString() {
         return "Visit{" +
                 "prescription: " + prescription +
-                "\n      " + doctor +
-                "\n      " + patient +
+                "\n      description: " + description +
+                "\n      doctor: " + doctor +
+                "\n      patient: " + patient +
                 "\n      visitID: " + visitID +
                 " , applyDate: " + applyDate +
                 " , completeDate: " + completeDate +

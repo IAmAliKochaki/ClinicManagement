@@ -1,8 +1,8 @@
 package SuperClassesPackage;
 
-import SuperClassesPackage.Person;
+import Interfaces.PersonnelInterface;
 
-public abstract class Personnel extends Person {
+public abstract class Personnel extends Person implements PersonnelInterface {
 
     protected double baseSalary;
     protected double overtime;
@@ -37,6 +37,7 @@ public abstract class Personnel extends Person {
         return salary;
     }
 
+    @Override
     public double calculateSalary(double overtime){
         salary = baseSalary + (baseSalary*0.01)*overtime;
         return salary;

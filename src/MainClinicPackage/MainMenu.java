@@ -149,6 +149,7 @@ public class MainMenu {
                         break;
                     case "10":
                         managerOptions();
+                        break;
                     default:
                         System.out.println("Invalid input!");
                 }
@@ -156,8 +157,9 @@ public class MainMenu {
                     break;
             }
             System.out.println("1: Back");
+            String back;
             while (true) {
-                String back = scanner.nextLine();
+                back = scanner.nextLine();
                 if (back.equals("1"))
                     showOptions();
                 else
@@ -193,6 +195,7 @@ public class MainMenu {
                         break;
                     case "6":
                         managerOptions();
+                        break;
                     default:
                         System.out.println("Invalid input!");
                 }
@@ -205,41 +208,12 @@ public class MainMenu {
 
             System.out.print("Doctor's age: ");
             int age = intScanner.nextInt();
-//            int age;
-//            while (true) {
-//                try {
-//                    System.out.print("Doctor's age: ");
-//                    age = intScanner.nextInt();
-//                    if (age <= 0)
-//                        throw new Exception();
-//                } catch (InputMismatchException e) {
-//                    System.out.println("Invalid input");
-//                } catch (Exception e) {
-//                    System.out.println("Age cannot be 0 or less");
-//                }
-//            }
 
             System.out.print("Doctor's expertise: ");
             String expertise = scanner.nextLine();
 
             System.out.print("Visiting fee: ");
             int fee = intScanner.nextInt();
-
-//            int fee;
-//            while (true) {
-//                //boolean valid = false;
-//                try {
-//                    System.out.print("Visiting fee: ");
-//                    fee = intScanner.nextInt();
-//                    if (fee <= 0)
-//                        throw new Exception();
-//                    break;
-//                } catch (InputMismatchException e) {
-//                    System.out.println("Invalid input");
-//                } catch (Exception e) {
-//                    System.out.println("Visiting fee cannot be 0 or less!");
-//                }
-//            }
 
             System.out.print("Doctor's address: ");
             String address = scanner.nextLine();
@@ -257,9 +231,10 @@ public class MainMenu {
             doctor.save();
             System.out.println("Doctor added successfully");
 
+            System.out.println("1: Back");
+            String back;
             while (true) {
-                System.out.println("1: Back");
-                String back = scanner.nextLine();
+                back = scanner.nextLine();
                 if (back.equals("1"))
                     addOptions();
                 else
@@ -293,9 +268,10 @@ public class MainMenu {
             nurse.save();
             System.out.println("Nurse added successfully");
 
+            System.out.println("1: Back");
+            String back;
             while (true) {
-                System.out.println("1: Back");
-                String back = scanner.nextLine();
+                back = scanner.nextLine();
                 if (back.equals("1"))
                     addOptions();
                 else
@@ -322,19 +298,20 @@ public class MainMenu {
             System.out.print("Employee's phone number: ");
             String phoneNumber = scanner.nextLine();
 
-            System.out.print("Username");
+            System.out.print("Username: ");
             String userName = scanner.nextLine();
 
-            System.out.print("Password");
+            System.out.print("Password: ");
             String passWord = scanner.nextLine();
 
             Employee employee = new Employee(name, position, age, address, phoneNumber, userName, passWord, baseSalary);
             employee.save();
             System.out.println("Employee added successfully");
 
+            System.out.println("1: Back");
+            String back;
             while (true) {
-                System.out.println("1: Back");
-                String back = scanner.nextLine();
+                back = scanner.nextLine();
                 if (back.equals("1"))
                     addOptions();
                 else
@@ -343,7 +320,6 @@ public class MainMenu {
         }
 
         private static void addProtection() {
-
             System.out.print("Protection's full name: ");
             String name = scanner.nextLine();
 
@@ -359,19 +335,20 @@ public class MainMenu {
             System.out.print("Protection's phone number: ");
             String phoneNumber = scanner.nextLine();
 
-            System.out.print("Username");
+            System.out.print("Username: ");
             String userName = scanner.nextLine();
 
-            System.out.print("Password");
+            System.out.print("Password: ");
             String passWord = scanner.nextLine();
 
             Protection protection = new Protection(name, age, address, phoneNumber, userName, passWord, baseSalary);
             protection.save();
             System.out.println("Protection added successfully");
 
+            System.out.println("1: Back");
+            String back;
             while (true) {
-                System.out.println("1: Back");
-                String back = scanner.nextLine();
+                back = scanner.nextLine();
                 if (back.equals("1"))
                     addOptions();
                 else
@@ -402,9 +379,10 @@ public class MainMenu {
             drug.save();
             System.out.println("Drug added successfully");
 
+            System.out.println("1: Back");
+            String back;
             while (true) {
-                System.out.println("1: Back");
-                String back = scanner.nextLine();
+                back = scanner.nextLine();
                 if (back.equals("1"))
                     addOptions();
                 else
@@ -422,35 +400,33 @@ public class MainMenu {
             System.out.println("6: Remove drug");
             System.out.println("7: Back");
 
+            String chose;
             while (true) {
-                try {
-                    int a = intScanner.nextInt();
-                    if (a < 1 || a > 7)
-                        throw new Exception();
-                    switch (a) {
-                        case 1:
-                            removeDoctor();
-                            break;
-                        case 2:
-                            removePatient();
-                            break;
-                        case 3:
-                            removeNurse();
-                            break;
-                        case 4:
-                            removeEmployee();
-                            break;
-                        case 5:
-                            removeProtection();
-                            break;
-                        case 6:
-                            removeDrug();
-                            break;
-                        case 7:
-                            managerOptions();
-                    }
-                } catch (Exception e) {
-                    System.out.println("Invalid");
+                chose = scanner.nextLine();
+                switch (chose) {
+                    case "1":
+                        removeDoctor();
+                        break;
+                    case "2":
+                        removePatient();
+                        break;
+                    case "3":
+                        removeNurse();
+                        break;
+                    case "4":
+                        removeEmployee();
+                        break;
+                    case "5":
+                        removeProtection();
+                        break;
+                    case "6":
+                        removeDrug();
+                        break;
+                    case "7":
+                        managerOptions();
+                        break;
+                    default:
+                        System.out.println("Invalid input!");
                 }
             }
         }
@@ -466,8 +442,9 @@ public class MainMenu {
             } catch (Exception e) {
             }
             System.out.println("1: Back");
+            String back;
             while (true) {
-                String back = scanner.nextLine();
+                back = scanner.nextLine();
                 if (back.equals("1"))
                     removeOptions();
                 else
@@ -486,8 +463,9 @@ public class MainMenu {
             } catch (Exception e) {
             }
             System.out.println("1: Back");
+            String back;
             while (true) {
-                String back = scanner.nextLine();
+                back = scanner.nextLine();
                 if (back.equals("1"))
                     removeOptions();
                 else
@@ -506,8 +484,9 @@ public class MainMenu {
             } catch (Exception e) {
             }
             System.out.println("1: Back");
+            String back;
             while (true) {
-                String back = scanner.nextLine();
+                back = scanner.nextLine();
                 if (back.equals("1"))
                     removeOptions();
                 else
@@ -526,8 +505,9 @@ public class MainMenu {
             } catch (Exception e) {
             }
             System.out.println("1: Back");
+            String back;
             while (true) {
-                String back = scanner.nextLine();
+                back = scanner.nextLine();
                 if (back.equals("1"))
                     removeOptions();
                 else
@@ -546,8 +526,9 @@ public class MainMenu {
             } catch (Exception e) {
             }
             System.out.println("1: Back");
+            String back;
             while (true) {
-                String back = scanner.nextLine();
+                back = scanner.nextLine();
                 if (back.equals("1"))
                     removeOptions();
                 else
@@ -566,8 +547,9 @@ public class MainMenu {
             } catch (Exception e) {
             }
             System.out.println("1: Back");
+            String back;
             while (true) {
-                String back = scanner.nextLine();
+                back = scanner.nextLine();
                 if (back.equals("1"))
                     removeOptions();
                 else
@@ -604,6 +586,7 @@ public class MainMenu {
                         break;
                     case "6":
                         managerOptions();
+                        break;
                     default:
                         System.out.println("Invalid input");
                 }
@@ -635,6 +618,7 @@ public class MainMenu {
                         break;
                     case "5":
                         payment();
+                        break;
                     default:
                         System.out.println("Invalid input!");
                 }
@@ -658,9 +642,11 @@ public class MainMenu {
             } catch (Exception e) {
             }
 
+            System.out.print("1: Back");
+            String back;
             while (true) {
                 System.out.print("1: Back");
-                String back = scanner.nextLine();
+                back = scanner.nextLine();
                 if (back.equals("1"))
                     edit();
                 else
@@ -685,9 +671,11 @@ public class MainMenu {
             } catch (Exception e) {
             }
 
+            System.out.print("1: Back");
+            String back;
             while (true) {
                 System.out.print("1: Back");
-                String back = scanner.nextLine();
+                back = scanner.nextLine();
                 if (back.equals("1"))
                     edit();
                 else
@@ -712,9 +700,11 @@ public class MainMenu {
             } catch (Exception e) {
             }
 
+            System.out.print("1: Back");
+            String back;
             while (true) {
                 System.out.print("1: Back");
-                String back = scanner.nextLine();
+                back = scanner.nextLine();
                 if (back.equals("1"))
                     edit();
                 else
@@ -739,9 +729,11 @@ public class MainMenu {
             } catch (Exception e) {
             }
 
+            System.out.print("1: Back");
+            String back;
             while (true) {
                 System.out.print("1: Back");
-                String back = scanner.nextLine();
+                back = scanner.nextLine();
                 if (back.equals("1"))
                     edit();
                 else
@@ -759,14 +751,16 @@ public class MainMenu {
                 ClinicFile.writeDoctor();
                 ClinicFile.writeBalance();
             } catch (Exception e) {
-                System.out.println("1: Back");
-                while (true) {
-                    String back = scanner.nextLine();
-                    if (back.equals("1"))
-                        payment();
-                    else
-                        System.out.println("Invalid input!");
-                }
+            }
+
+            System.out.println("1: Back");
+            String back;
+            while (true) {
+                back = scanner.nextLine();
+                if (back.equals("1"))
+                    payment();
+                else
+                    System.out.println("Invalid input!");
             }
         }
 
@@ -784,14 +778,16 @@ public class MainMenu {
                 ClinicFile.writeNurse();
                 ClinicFile.writeBalance();
             } catch (Exception e) {
-                System.out.println("1: Back");
-                while (true) {
-                    String back = scanner.nextLine();
-                    if (back.equals("1"))
-                        payment();
-                    else
-                        System.out.println("Invalid input!");
-                }
+            }
+
+            System.out.println("1: Back");
+            String back;
+            while (true) {
+                back = scanner.nextLine();
+                if (back.equals("1"))
+                    payment();
+                else
+                    System.out.println("Invalid input!");
             }
         }
 
@@ -809,14 +805,16 @@ public class MainMenu {
                 ClinicFile.writeEmployee();
                 ClinicFile.writeBalance();
             } catch (Exception e) {
-                System.out.println("1: Back");
-                while (true) {
-                    String back = scanner.nextLine();
-                    if (back.equals("1"))
-                        payment();
-                    else
-                        System.out.println("Invalid input!");
-                }
+            }
+
+            System.out.println("1: Back");
+            String back;
+            while (true) {
+                back = scanner.nextLine();
+                if (back.equals("1"))
+                    payment();
+                else
+                    System.out.println("Invalid input!");
             }
         }
 
@@ -834,14 +832,16 @@ public class MainMenu {
                 ClinicFile.writeProtection();
                 ClinicFile.writeBalance();
             } catch (Exception e) {
-                System.out.println("1: Back");
-                while (true) {
-                    String back = scanner.nextLine();
-                    if (back.equals("1"))
-                        payment();
-                    else
-                        System.out.println("Invalid input!");
-                }
+            }
+
+            System.out.println("1: Back");
+            String back;
+            while (true) {
+                back = scanner.nextLine();
+                if (back.equals("1"))
+                    payment();
+                else
+                    System.out.println("Invalid input!");
             }
         }
     }
@@ -885,10 +885,9 @@ public class MainMenu {
             if (doctor != null)
                 doctorMenu();
             else {
-                System.out.println("There is no doctor with this information or the information is incorrect!");
+                System.out.println("There is no doctor with this information! please check.");
                 main();
             }
-
         }
 
         private static void doctorMenu() {
@@ -912,6 +911,9 @@ public class MainMenu {
                         break;
                     case "4":
                         MainMenu.main();
+                        break;
+                    default:
+                        System.out.println("Invalid input!");
                 }
             }
         }
@@ -953,17 +955,21 @@ public class MainMenu {
             System.out.println("Enter the drug ID you want to add to the prescription (enter 0 to end):");
             int drugId;
             boolean visit = false;
+            Drug drug;
             while (true) {
                 drugId = intScanner.nextInt();
                 if (drugId == 0)
                     break;
                 try {
-                    doctor.visiting(visitId, Manager.getDrugByID(drugId));
-                    visit = true;
+                    drug = Manager.getDrugByID(drugId);
+                    if (drug.getExpertise().equals(doctor.getExpertise())) {
+                        doctor.visiting(visitId, drug);
+                        visit = true;
+                    }
                 } catch (Exception e) {
                 }
             }
-            if (visit){
+            if (visit) {
                 doctor.completeVisiting();
                 ClinicFile.writeDoctor();
                 ClinicFile.writeVisit();
@@ -974,12 +980,12 @@ public class MainMenu {
 
             System.out.println("1: Back");
             String back;
-            while (true){
+            while (true) {
                 back = scanner.nextLine();
                 if (back.equals("1"))
                     doctorMenu();
-                    else
-                System.out.println("Invalid input!");
+                else
+                    System.out.println("Invalid input!");
             }
         }
 
@@ -996,13 +1002,8 @@ public class MainMenu {
             System.out.println("password");
             String password = scanner.nextLine();
 
-            doctor.setAddress(address);
-            doctor.setPhoneNumber(phoneNumber);
-            doctor.setUserName(username);
-            doctor.setPassWord(password);
-
+            doctor.edit(address , phoneNumber , username , password);
             ClinicFile.writeDoctor();
-
             System.out.println("Changes saved successfully");
 
             System.out.println("1: Back");
@@ -1126,6 +1127,10 @@ public class MainMenu {
         }
 
         private static void requestVisit() {
+            for (Doctor doctor : ClinicFile.doctors) {
+                System.out.println(doctor);
+            }
+
             System.out.print("Enter the required expertise: ");
             String expertise = scanner.nextLine();
 
@@ -1177,13 +1182,8 @@ public class MainMenu {
             System.out.println("password: ");
             String password = scanner.nextLine();
 
-            patient.setAddress(address);
-            patient.setPhoneNumber(phoneNumber);
-            patient.setUserName(username);
-            patient.setPassWord(password);
-
+            patient.edit(address , phoneNumber , username , password);
             ClinicFile.writePatient();
-
             System.out.println("Changes saved successfully");
 
             System.out.println("1: Back");
@@ -1199,17 +1199,266 @@ public class MainMenu {
     }
 
     private static abstract class NurseMenu {
+        private static Nurse nurse = null;
         public static void main() {
+            System.out.println("1: Login");
+            System.out.println("2: Back");
+            String log;
+            while (true) {
+                log = scanner.nextLine();
+                switch (log) {
+                    case "1":
+                        login();
+                        break;
+                    case "2":
+                        MainMenu.main();
+                        break;
+                    default:
+                        System.out.println("Invalid input");
+                }
+            }
+        }
+
+        private static void login() {
+            System.out.print("Username: ");
+            String username = scanner.nextLine();
+
+            System.out.print("Password: ");
+            String password = scanner.nextLine();
+
+            boolean check = false;
+            for (Nurse nurse1 : ClinicFile.nurses) {
+                if (nurse1.getUserName().equals(username) && nurse1.getPassWord().equals(password)) {
+                    nurse = nurse1;
+                    break;
+                }
+            }
+            if (nurse != null)
+                nurseMenu();
+            else {
+                System.out.println("There is no nurse with this information! please check.");
+                main();
+            }
+        }
+
+        private static void nurseMenu() {
+            System.out.println("1: Edit");
+            System.out.println("2: Back");
+
+            String chose;
+            while (true){
+                chose = scanner.nextLine();
+                switch (chose){
+                    case "1":edit();break;
+                    case "2":MainMenu.main();break;
+                    default:
+                        System.out.println("Invalid input!");
+                }
+            }
+        }
+
+        private static void edit() {
+            System.out.print("Enter your new address: ");
+            String address = scanner.nextLine();
+
+            System.out.println("phone number");
+            String phoneNumber = scanner.nextLine();
+
+            System.out.println("username");
+            String username = scanner.nextLine();
+
+            System.out.println("password");
+            String password = scanner.nextLine();
+
+            nurse.edit(address , phoneNumber , username , password);
+            ClinicFile.writeNurse();
+            System.out.println("Changes saved successfully");
+
+            System.out.println("1: Back");
+            String back;
+            while (true) {
+                back = scanner.nextLine();
+                if (back.equals("1"))
+                    nurseMenu();
+                else
+                    System.out.println("Invalid input!");
+            }
         }
     }
 
     private static abstract class EmployeeMenu {
+        private static Employee employee = null;
         public static void main() {
+            System.out.println("1: Login");
+            System.out.println("2: Back");
+            String log;
+            while (true) {
+                log = scanner.nextLine();
+                switch (log) {
+                    case "1":
+                        login();
+                        break;
+                    case "2":
+                        MainMenu.main();
+                        break;
+                    default:
+                        System.out.println("Invalid input");
+                }
+            }
+        }
+
+        private static void login() {
+            System.out.print("Username: ");
+            String username = scanner.nextLine();
+
+            System.out.print("Password: ");
+            String password = scanner.nextLine();
+
+            boolean check = false;
+            for (Employee employee1 : ClinicFile.employees) {
+                if (employee1.getUserName().equals(username) && employee1.getPassWord().equals(password)) {
+                    employee = employee1;
+                    break;
+                }
+            }
+            if (employee != null)
+                employeeMenu();
+            else {
+                System.out.println("There is no employee with this information! please check.");
+                main();
+            }
+        }
+
+        private static void employeeMenu() {
+            System.out.println("1: Edit");
+            System.out.println("2: Back");
+
+            String chose;
+            while (true){
+                chose = scanner.nextLine();
+                switch (chose){
+                    case "1":edit();break;
+                    case "2":MainMenu.main();break;
+                    default:
+                        System.out.println("Invalid input!");
+                }
+            }
+        }
+
+        private static void edit() {
+            System.out.print("Enter your new address: ");
+            String address = scanner.nextLine();
+
+            System.out.println("phone number");
+            String phoneNumber = scanner.nextLine();
+
+            System.out.println("username");
+            String username = scanner.nextLine();
+
+            System.out.println("password");
+            String password = scanner.nextLine();
+
+            employee.edit(address , phoneNumber , username , password);
+            ClinicFile.writeEmployee();
+            System.out.println("Changes saved successfully");
+
+            System.out.println("1: Back");
+            String back;
+            while (true) {
+                back = scanner.nextLine();
+                if (back.equals("1"))
+                    employeeMenu();
+                else
+                    System.out.println("Invalid input!");
+            }
         }
     }
 
     private static abstract class ProtectionMenu {
+        private static Protection protection = null;
         public static void main() {
+            System.out.println("1: Login");
+            System.out.println("2: Back");
+            String log;
+            while (true) {
+                log = scanner.nextLine();
+                switch (log) {
+                    case "1":
+                        login();
+                        break;
+                    case "2":
+                        MainMenu.main();
+                        break;
+                    default:
+                        System.out.println("Invalid input");
+                }
+            }
+        }
+
+        private static void login() {
+            System.out.print("Username: ");
+            String username = scanner.nextLine();
+
+            System.out.print("Password: ");
+            String password = scanner.nextLine();
+
+            boolean check = false;
+            for (Protection protection1 : ClinicFile.protections) {
+                if (protection1.getUserName().equals(username) && protection1.getPassWord().equals(password)) {
+                    protection = protection1;
+                    break;
+                }
+            }
+            if (protection != null)
+                protectionMenu();
+            else {
+                System.out.println("There is no protection with this information! please check.");
+                main();
+            }
+        }
+
+        private static void protectionMenu() {
+            System.out.println("1: Edit");
+            System.out.println("2: Back");
+
+            String chose;
+            while (true){
+                chose = scanner.nextLine();
+                switch (chose){
+                    case "1":edit();break;
+                    case "2":MainMenu.main();break;
+                    default:
+                        System.out.println("Invalid input!");
+                }
+            }
+        }
+
+        private static void edit() {
+            System.out.print("Enter your new address: ");
+            String address = scanner.nextLine();
+
+            System.out.println("phone number");
+            String phoneNumber = scanner.nextLine();
+
+            System.out.println("username");
+            String username = scanner.nextLine();
+
+            System.out.println("password");
+            String password = scanner.nextLine();
+
+            protection.edit(address , phoneNumber , username , password);
+            ClinicFile.writeProtection();
+            System.out.println("Changes saved successfully");
+
+            System.out.println("1: Back");
+            String back;
+            while (true) {
+                back = scanner.nextLine();
+                if (back.equals("1"))
+                    protectionMenu();
+                else
+                    System.out.println("Invalid input!");
+            }
         }
     }
 

@@ -1,8 +1,8 @@
 package SuperClassesPackage;
 
 import java.io.Serializable;
-
-public abstract class Person implements Serializable {
+import Interfaces.PersonInterface;
+public abstract class Person implements Serializable, PersonInterface {
     protected String fullName;
     protected int age;
     protected String address;
@@ -59,6 +59,7 @@ public abstract class Person implements Serializable {
         return passWord;
     }
 
+    @Override
     public void edit(String address , String phoneNumber , String username , String password){
         setAddress(address);
         setPhoneNumber(phoneNumber);

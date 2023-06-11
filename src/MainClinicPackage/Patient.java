@@ -1,6 +1,5 @@
 package MainClinicPackage;
 
-import SuperClassesPackage.Person;
 
 import java.util.ArrayList;
 
@@ -21,10 +20,10 @@ public class Patient extends Person {
 
     public void applyVisit(Doctor doctor , String description) {
         //add the incomplete visit to patient's , doctor's and clinic's incomplete visit list
-        var visit = new Visit(doctor, this , description);
+        Visit visit = new Visit(doctor, this , description);
         visits.add(visit);
         doctor.addVisit(visit);
-        ClinicFile.visits.add(visit);
+        visit.save();
     }
 
     public void showCompleteVisits() {
@@ -36,9 +35,12 @@ public class Patient extends Person {
     }
 
     public void showInCompleteVisits() {
-        for (Visit visit : visits)
-            if (!(visit.getChecked()))
+        for (Visit visit : visits){
+            if (!(visit.getChecked())){
                 System.out.println(visit);
+            }
+        }
+
     }
 
     public void save() {

@@ -227,7 +227,7 @@ public abstract class ClinicFile {
         } finally {
             if (visits.size() != 0) {
                 int n = visits.size() - 1;
-                Visit.visit_ID = visits.get(n).getVisitID() + 1;
+                Visit.visit_ID = 1 + visits.get(n).getVisitID();
             }
         }
     }
@@ -297,5 +297,3 @@ public abstract class ClinicFile {
         writeDrug();
     }
 }
-
-

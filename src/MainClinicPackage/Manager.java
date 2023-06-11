@@ -1,7 +1,5 @@
 package MainClinicPackage;
 
-import SuperClassesPackage.Personnel;
-
 
 public abstract class Manager {
     public static String fullName = "ali kochaki";

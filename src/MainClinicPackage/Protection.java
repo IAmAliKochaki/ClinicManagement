@@ -1,7 +1,5 @@
 package MainClinicPackage;
 
-import SuperClassesPackage.Personnel;
-
 public class Protection extends Personnel {
     public static int protection_ID = 1;
     private int protectionID ;

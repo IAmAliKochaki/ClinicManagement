@@ -11,6 +11,11 @@ public class Visit implements Serializable {
     private Patient patient;
     private ArrayList<Drug> prescription;
     private Date applyDate;
+
+    public void setCompleteDate(Date completeDate) {
+        this.completeDate = completeDate;
+    }
+
     private Date completeDate;
     private Boolean checked;
     private String description;
@@ -54,7 +59,7 @@ public class Visit implements Serializable {
 
     //add drug to prescription
     public void completePrescription(Drug drug) {
-        prescription.add((Drug) drug);
+        prescription.add(drug);
     }
 
     public void save() {
@@ -66,8 +71,8 @@ public class Visit implements Serializable {
         return "Visit{" +
                 "prescription: " + prescription +
                 "\n      description: " + description +
-                "\n      doctor: " + doctor +
-                "\n      patient: " + patient +
+                "\n      doctor's name: " + doctor.fullName + " , doctor's id: " + doctor.getDoctorID() +
+                "\n      patient's name: " + patient.fullName + " , patient's id: " + patient.getPatientID() +
                 "\n      visitID: " + visitID +
                 " , applyDate: " + applyDate +
                 " , completeDate: " + completeDate +

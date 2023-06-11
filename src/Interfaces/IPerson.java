@@ -1,5 +1,5 @@
 package Interfaces;
 
-public interface PersonInterface {
+public interface IPerson {
     void edit(String address , String phoneNumber , String username , String password);
 }

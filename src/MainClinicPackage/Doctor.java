@@ -1,10 +1,7 @@
 package MainClinicPackage;
 
-import SuperClassesPackage.Person;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Date;
 
 public class Doctor extends Person {
     private String expertise;
@@ -72,11 +69,12 @@ public class Doctor extends Person {
         return doctorID;
     }
 
-    //when the doctor complete the visit
-    public void completeVisiting() {
+//    @Override
+    public void completeVisiting() { //when the doctor complete the visit
         claim += fee; //calculate claim
         ClinicFile.balance += fee * 1.3; //As much as 30% of each visit is the share of the clinic :)
     }
+
 
     public void addVisit(Visit visit) {
         visits.add(visit);
@@ -100,6 +98,7 @@ public class Doctor extends Person {
         try {
             getInCompleteVisitByID(visitID).completePrescription(drug);
             getInCompleteVisitByID(visitID).setChecked(true);
+            getInCompleteVisitByID(visitID).setCompleteDate(new Date());
         } catch (Exception e) {
         }
     }

@@ -1,7 +1,5 @@
 package MainClinicPackage;
 
-import SuperClassesPackage.Personnel;
-
 public class Employee extends Personnel {
     public static int employee_ID = 1;
     private int employeeID ;

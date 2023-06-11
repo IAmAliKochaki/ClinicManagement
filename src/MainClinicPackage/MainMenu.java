@@ -663,7 +663,7 @@ public class MainMenu {
                 System.out.println("Current base salary: " + (nurse.getBaseSalary()));
                 System.out.print("Enter the new base salary: ");
                 int baseSalary = intScanner.nextInt();
-                nurse.setBaseSalary(baseSalary);
+                Manager.changePersonnelBaseSalary(nurse, baseSalary);
                 ClinicFile.writeNurse();
                 System.out.println("Changes saved successfully");
             } catch (InputMismatchException e) {
@@ -692,7 +692,7 @@ public class MainMenu {
                 System.out.println("Current base salary: " + (employee.getBaseSalary()));
                 System.out.print("Enter the new base salary: ");
                 int baseSalary = intScanner.nextInt();
-                employee.setBaseSalary(baseSalary);
+                Manager.changePersonnelBaseSalary(employee, baseSalary);
                 ClinicFile.writeEmployee();
                 System.out.println("Changes saved successfully");
             } catch (InputMismatchException e) {
@@ -721,7 +721,7 @@ public class MainMenu {
                 System.out.println("Current base salary: " + (protection.getBaseSalary()));
                 System.out.print("Enter the new base salary: ");
                 int baseSalary = intScanner.nextInt();
-                protection.setBaseSalary(baseSalary);
+                Manager.changePersonnelBaseSalary(protection, baseSalary);
                 ClinicFile.writeProtection();
                 System.out.println("Changes saved successfully");
             } catch (InputMismatchException e) {
@@ -750,6 +750,7 @@ public class MainMenu {
                 Manager.paymentDoctorsClaim(Manager.getDoctorByID(id));
                 ClinicFile.writeDoctor();
                 ClinicFile.writeBalance();
+                System.out.println("Payment was successful.");
             } catch (Exception e) {
             }
 
@@ -777,6 +778,7 @@ public class MainMenu {
                 Manager.payPersonnelSalary(Manager.getNurseByID(id));
                 ClinicFile.writeNurse();
                 ClinicFile.writeBalance();
+                System.out.println("Payment was successful.");
             } catch (Exception e) {
             }
 
@@ -804,6 +806,7 @@ public class MainMenu {
                 Manager.payPersonnelSalary(Manager.getEmployeeByID(id));
                 ClinicFile.writeEmployee();
                 ClinicFile.writeBalance();
+                System.out.println("Payment was successful.");
             } catch (Exception e) {
             }
 
@@ -831,6 +834,7 @@ public class MainMenu {
                 Manager.payPersonnelSalary(Manager.getProtectionByID(id));
                 ClinicFile.writeProtection();
                 ClinicFile.writeBalance();
+                System.out.println("Payment was successful.");
             } catch (Exception e) {
             }
 
@@ -941,41 +945,56 @@ public class MainMenu {
                 for (Visit visit : doctor.getInCompleteVisits()) {
                     System.out.println(visit);
                 }
-            } catch (Exception e) {
-            }
 
-            System.out.print("Enter the visit's id: ");
-            int visitId = intScanner.nextInt();
+                System.out.print("Enter the visit's id: ");
+                int visitId = intScanner.nextInt();
+                doctor.getInCompleteVisitByID(visitId);
 
-            for (Drug drug : ClinicFile.drugs) {
-                if (drug.getExpertise().equals(doctor.getExpertise()))
-                    System.out.println(drug);
-            }
-
-            System.out.println("Enter the drug ID you want to add to the prescription (enter 0 to end):");
-            int drugId;
-            boolean visit = false;
-            Drug drug;
-            while (true) {
-                drugId = intScanner.nextInt();
-                if (drugId == 0)
-                    break;
-                try {
-                    drug = Manager.getDrugByID(drugId);
-                    if (drug.getExpertise().equals(doctor.getExpertise())) {
-                        doctor.visiting(visitId, drug);
-                        visit = true;
-                    }
-                } catch (Exception e) {
+                for (Drug drug : ClinicFile.drugs) {
+                    if (drug.getExpertise().equals(doctor.getExpertise()))
+                        System.out.println(drug);
                 }
-            }
-            if (visit) {
-                doctor.completeVisiting();
-                ClinicFile.writeDoctor();
-                ClinicFile.writeVisit();
-                ClinicFile.writePatient();
-                ClinicFile.writeBalance();
-                System.out.println("The visit is complete");
+
+                int drugId;
+                boolean complete = false;
+                boolean visit = false;
+                Drug drug;
+
+                System.out.println("Enter the drug ID you want to add to the prescription (enter 0 to end):");
+
+                while (true) {
+
+                    drugId = intScanner.nextInt();
+
+                    try {
+                        drug = Manager.getDrugByID(drugId);
+                        if (drugId == 0) {
+                            complete = true;
+                            break;
+                        }
+
+                        if (drug.getExpertise().equals(doctor.getExpertise())) {
+                            doctor.visiting(visitId, drug);
+                            visit = true;
+                        } else if (!(drug.getExpertise().equals(doctor.getExpertise()))) {
+                            System.out.println("You do not have access to this drug!");
+                        }
+
+                    } catch (Exception e) {
+                    }
+
+                    if (complete)
+                        break;
+                }
+                if (visit) {
+                    doctor.completeVisiting();
+                    ClinicFile.writeDoctor();
+                    ClinicFile.writeVisit();
+                    ClinicFile.writePatient();
+                    ClinicFile.writeBalance();
+                    System.out.println("The visit is complete");
+                }
+            } catch (Exception e) {
             }
 
             System.out.println("1: Back");
@@ -1002,7 +1021,7 @@ public class MainMenu {
             System.out.println("password");
             String password = scanner.nextLine();
 
-            doctor.edit(address , phoneNumber , username , password);
+            doctor.edit(address, phoneNumber, username, password);
             ClinicFile.writeDoctor();
             System.out.println("Changes saved successfully");
 
@@ -1148,7 +1167,7 @@ public class MainMenu {
                 int doctorId = intScanner.nextInt();
                 try {
                     Doctor doctor = Manager.getDoctorByID(doctorId);
-                    System.out.println("Describe your illness: ");
+                    System.out.print("Describe your illness: ");
                     String descriptio = scanner.nextLine();
                     patient.applyVisit(doctor, descriptio);
                     ClinicFile.writePatient();
@@ -1182,7 +1201,7 @@ public class MainMenu {
             System.out.println("password: ");
             String password = scanner.nextLine();
 
-            patient.edit(address , phoneNumber , username , password);
+            patient.edit(address, phoneNumber, username, password);
             ClinicFile.writePatient();
             System.out.println("Changes saved successfully");
 
@@ -1200,6 +1219,7 @@ public class MainMenu {
 
     private static abstract class NurseMenu {
         private static Nurse nurse = null;
+
         public static void main() {
             System.out.println("1: Login");
             System.out.println("2: Back");
@@ -1246,11 +1266,15 @@ public class MainMenu {
             System.out.println("2: Back");
 
             String chose;
-            while (true){
+            while (true) {
                 chose = scanner.nextLine();
-                switch (chose){
-                    case "1":edit();break;
-                    case "2":MainMenu.main();break;
+                switch (chose) {
+                    case "1":
+                        edit();
+                        break;
+                    case "2":
+                        MainMenu.main();
+                        break;
                     default:
                         System.out.println("Invalid input!");
                 }
@@ -1270,7 +1294,7 @@ public class MainMenu {
             System.out.println("password");
             String password = scanner.nextLine();
 
-            nurse.edit(address , phoneNumber , username , password);
+            nurse.edit(address, phoneNumber, username, password);
             ClinicFile.writeNurse();
             System.out.println("Changes saved successfully");
 
@@ -1288,6 +1312,7 @@ public class MainMenu {
 
     private static abstract class EmployeeMenu {
         private static Employee employee = null;
+
         public static void main() {
             System.out.println("1: Login");
             System.out.println("2: Back");
@@ -1334,11 +1359,15 @@ public class MainMenu {
             System.out.println("2: Back");
 
             String chose;
-            while (true){
+            while (true) {
                 chose = scanner.nextLine();
-                switch (chose){
-                    case "1":edit();break;
-                    case "2":MainMenu.main();break;
+                switch (chose) {
+                    case "1":
+                        edit();
+                        break;
+                    case "2":
+                        MainMenu.main();
+                        break;
                     default:
                         System.out.println("Invalid input!");
                 }
@@ -1358,7 +1387,7 @@ public class MainMenu {
             System.out.println("password");
             String password = scanner.nextLine();
 
-            employee.edit(address , phoneNumber , username , password);
+            employee.edit(address, phoneNumber, username, password);
             ClinicFile.writeEmployee();
             System.out.println("Changes saved successfully");
 
@@ -1376,6 +1405,7 @@ public class MainMenu {
 
     private static abstract class ProtectionMenu {
         private static Protection protection = null;
+
         public static void main() {
             System.out.println("1: Login");
             System.out.println("2: Back");
@@ -1422,11 +1452,15 @@ public class MainMenu {
             System.out.println("2: Back");
 
             String chose;
-            while (true){
+            while (true) {
                 chose = scanner.nextLine();
-                switch (chose){
-                    case "1":edit();break;
-                    case "2":MainMenu.main();break;
+                switch (chose) {
+                    case "1":
+                        edit();
+                        break;
+                    case "2":
+                        MainMenu.main();
+                        break;
                     default:
                         System.out.println("Invalid input!");
                 }
@@ -1446,7 +1480,7 @@ public class MainMenu {
             System.out.println("password");
             String password = scanner.nextLine();
 
-            protection.edit(address , phoneNumber , username , password);
+            protection.edit(address, phoneNumber, username, password);
             ClinicFile.writeProtection();
             System.out.println("Changes saved successfully");
 

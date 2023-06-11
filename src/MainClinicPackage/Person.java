@@ -1,8 +1,9 @@
-package SuperClassesPackage;
+package MainClinicPackage;
+
+import Interfaces.IPerson;
 
 import java.io.Serializable;
-import Interfaces.PersonInterface;
-public abstract class Person implements Serializable, PersonInterface {
+public abstract class Person implements Serializable , IPerson {
     protected String fullName;
     protected int age;
     protected String address;
@@ -59,7 +60,6 @@ public abstract class Person implements Serializable, PersonInterface {
         return passWord;
     }
 
-    @Override
     public void edit(String address , String phoneNumber , String username , String password){
         setAddress(address);
         setPhoneNumber(phoneNumber);

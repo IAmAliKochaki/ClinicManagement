@@ -46,7 +46,6 @@ public class MainMenu {
                     System.out.println("Invalid input!");
             }
         }
-
     }
 
     //manager menu, show , add , remove , payment
@@ -212,9 +211,6 @@ public class MainMenu {
             System.out.print("Doctor's expertise: ");
             String expertise = scanner.nextLine();
 
-            System.out.print("Visiting fee: ");
-            int fee = intScanner.nextInt();
-
             System.out.print("Doctor's address: ");
             String address = scanner.nextLine();
 
@@ -227,7 +223,7 @@ public class MainMenu {
             System.out.print("Password: ");
             String passWord = scanner.nextLine();
 
-            Doctor doctor = new Doctor(name, age, address, phoneNumber, userName, passWord, expertise, fee);
+            Doctor doctor = new Doctor(name, age, address, phoneNumber, userName, passWord, expertise);
             doctor.save();
             System.out.println("Doctor added successfully");
 
@@ -559,32 +555,28 @@ public class MainMenu {
 
         //The manager pays personnel salary and doctors claim
         private static void payment() {
-            System.out.println("1: Payment of doctors' claims");
-            System.out.println("2: Paying nurses' salaries");
-            System.out.println("3: Paying employees' salaries");
-            System.out.println("4: Paying protections' salaries");
-            System.out.println("5: Edit");
-            System.out.println("6: Back");
+            System.out.println("1: Paying nurses' salaries");
+            System.out.println("2: Paying employees' salaries");
+            System.out.println("3: Paying protections' salaries");
+            System.out.println("4: Edit");
+            System.out.println("5: Back");
             String chose;
             while (true) {
                 chose = scanner.nextLine();
                 switch (chose) {
                     case "1":
-                        paymentOfDoctorsClaims();
-                        break;
-                    case "2":
                         payingNursesSalaries();
                         break;
-                    case "3":
+                    case "2":
                         payingEmployeesSalaries();
                         break;
-                    case "4":
+                    case "3":
                         payingProtectionsSalaries();
                         break;
-                    case "5":
+                    case "4":
                         edit();
                         break;
-                    case "6":
+                    case "5":
                         managerOptions();
                         break;
                     default:
@@ -594,63 +586,30 @@ public class MainMenu {
         }
 
         private static void edit() {
-            System.out.println("1: Edit the cost of a doctor's visit");
-            System.out.println("2: Edit the basic salary of a nurse");
-            System.out.println("3: Edit the basic salary of a employee");
-            System.out.println("4: Edit the basic salary of a protection");
-            System.out.println("5: Back");
+            System.out.println("1: Edit the basic salary of a nurse");
+            System.out.println("2: Edit the basic salary of a employee");
+            System.out.println("3: Edit the basic salary of a protection");
+            System.out.println("4: Back");
 
             String chose;
             while (true) {
                 chose = scanner.nextLine();
                 switch (chose) {
                     case "1":
-                        editDoctorSFee();
-                        break;
-                    case "2":
                         editNurseSBaseSalary();
                         break;
-                    case "3":
+                    case "2":
                         editEmployeeSBaseSalary();
                         break;
-                    case "4":
+                    case "3":
                         editProtectionSBaseSalary();
                         break;
-                    case "5":
+                    case "4":
                         payment();
                         break;
                     default:
                         System.out.println("Invalid input!");
                 }
-            }
-        }
-
-        private static void editDoctorSFee() {
-            Manager.showDoctors();
-
-            try {
-                int doctorId = intScanner.nextInt();
-                Doctor doctor = Manager.getDoctorByID(doctorId);
-                System.out.println("Current fee : " + (doctor.getFee()));
-                System.out.print("Enter the new fee: ");
-                int fee = intScanner.nextInt();
-                doctor.setFee(fee);
-                ClinicFile.writeDoctor();
-                System.out.println("Changes saved successfully");
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid input!");
-            } catch (Exception e) {
-            }
-
-            System.out.print("1: Back");
-            String back;
-            while (true) {
-                System.out.print("1: Back");
-                back = scanner.nextLine();
-                if (back.equals("1"))
-                    edit();
-                else
-                    System.out.println("Invalid input");
             }
         }
 
@@ -738,30 +697,6 @@ public class MainMenu {
                     edit();
                 else
                     System.out.println("Invalid input");
-            }
-        }
-
-        private static void paymentOfDoctorsClaims() {
-            Manager.showDoctors();
-
-            System.out.print("Enter the doctor's ID: ");
-            int id = intScanner.nextInt();
-            try {
-                Manager.paymentDoctorsClaim(Manager.getDoctorByID(id));
-                ClinicFile.writeDoctor();
-                ClinicFile.writeBalance();
-                System.out.println("Payment was successful.");
-            } catch (Exception e) {
-            }
-
-            System.out.println("1: Back");
-            String back;
-            while (true) {
-                back = scanner.nextLine();
-                if (back.equals("1"))
-                    payment();
-                else
-                    System.out.println("Invalid input!");
             }
         }
 
@@ -955,43 +890,39 @@ public class MainMenu {
                         System.out.println(drug);
                 }
 
-                int drugId;
-                boolean complete = false;
-                boolean visit = false;
+                int drugId;// get drug's id from doctor
+//                boolean complete = false;//when the doctor complete the prescription, enter 0 and complete set true
+                boolean visit = false;//if doctor complete visit , visit set true
                 Drug drug;
 
                 System.out.println("Enter the drug ID you want to add to the prescription (enter 0 to end):");
 
                 while (true) {
-
                     drugId = intScanner.nextInt();
 
-                    try {
-                        drug = Manager.getDrugByID(drugId);
-                        if (drugId == 0) {
-                            complete = true;
-                            break;
-                        }
+                    drug = Manager.getDrugByID(drugId);
 
-                        if (drug.getExpertise().equals(doctor.getExpertise())) {
-                            doctor.visiting(visitId, drug);
-                            visit = true;
-                        } else if (!(drug.getExpertise().equals(doctor.getExpertise()))) {
-                            System.out.println("You do not have access to this drug!");
-                        }
-
-                    } catch (Exception e) {
+                    if (drugId == 0) {
+//                        complete = true;
+                        break;
                     }
 
-                    if (complete)
-                        break;
+                    if (drug.getExpertise().equals(doctor.getExpertise())) {
+                        doctor.visiting(visitId, drug);
+                        Manager.getVisitByID(visitId).complete();
+                        ClinicFile.writeDoctor();
+                        ClinicFile.writeVisit();
+                        ClinicFile.writePatient();
+                        ClinicFile.writeBalance();
+                        visit = true;
+                    } else if (!(drug.getExpertise().equals(doctor.getExpertise()))) {
+                        System.out.println("You do not have access to this drug!");
+                    }
+
+//                    if (complete)
+//                        break;
                 }
                 if (visit) {
-                    doctor.completeVisiting();
-                    ClinicFile.writeDoctor();
-                    ClinicFile.writeVisit();
-                    ClinicFile.writePatient();
-                    ClinicFile.writeBalance();
                     System.out.println("The visit is complete");
                 }
             } catch (Exception e) {
@@ -1126,11 +1057,19 @@ public class MainMenu {
                         requestVisit();
                         break;
                     case "2":
-                        patient.showCompleteVisits();
+                        try {
+                            patient.showCompleteVisits();
+                        } catch (NullPointerException e) {
+                            System.out.println("There are no complete visit to show!");
+                        }
                         patientMenu();
                         break;
                     case "3":
-                        patient.showInCompleteVisits();
+                        try {
+                            patient.showInCompleteVisits();
+                        } catch (NullPointerException e) {
+                            System.out.println("There are no incomplete visit to show!");
+                        }
                         patientMenu();
                         break;
                     case "4":
@@ -1150,31 +1089,18 @@ public class MainMenu {
                 System.out.println(doctor);
             }
 
-            System.out.print("Enter the required expertise: ");
-            String expertise = scanner.nextLine();
-
-            boolean available = false;
-            for (Doctor doctor : ClinicFile.doctors) {
-                if (doctor.getExpertise().equals(expertise)) {
-                    System.out.println(doctor);
-                    available = true;
-                }
-            }
-            if (!available) {
-                System.out.println("There is no doctor with this specialty!");
-            } else {
-                System.out.println("Enter the doctor ID you want");
-                int doctorId = intScanner.nextInt();
-                try {
-                    Doctor doctor = Manager.getDoctorByID(doctorId);
-                    System.out.print("Describe your illness: ");
-                    String descriptio = scanner.nextLine();
-                    patient.applyVisit(doctor, descriptio);
-                    ClinicFile.writePatient();
-                    ClinicFile.writeDoctor();
-                    System.out.println("Your request has been successfully saved");
-                } catch (Exception e) {
-                }
+            System.out.print("Enter the doctor ID you want: ");
+            int doctorId = intScanner.nextInt();
+            try {
+                Doctor doctor = Manager.getDoctorByID(doctorId);
+                System.out.print("Describe your illness: ");
+                String descriptio = scanner.nextLine();
+                patient.applyVisit(doctor, descriptio);
+                ClinicFile.writePatient();
+                ClinicFile.writeDoctor();
+                ClinicFile.writeVisit();
+                System.out.println("Your request has been successfully saved");
+            } catch (Exception e) {
             }
 
             System.out.println("1: Back");

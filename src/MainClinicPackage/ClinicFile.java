@@ -129,7 +129,6 @@ public abstract class ClinicFile {
         }
     }
 
-
     public static void readPatients() {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(patientPath))) {
             while (true) {

@@ -118,6 +118,19 @@ public abstract class Manager {
         return targetDrug;
     }
 
+    public static Visit getVisitByID(int id) throws Exception {
+        Visit targetVisit = null;
+        for (Visit visit : ClinicFile.visits) {
+            if (visit.getVisitID() == id) {
+                targetVisit = visit;
+                break;
+            }
+        }
+        if (targetVisit == null)
+            throw new Exception("There is no drug with this ID! please check and try again.");
+        return targetVisit;
+    }
+
     public static Nurse getNurseByID(int id) throws Exception {
         Nurse targetNurse = null;
         for (Nurse nurse : ClinicFile.nurses) {
@@ -155,15 +168,6 @@ public abstract class Manager {
         if (targetProtection == null)
             throw new Exception("There is no protection with this ID! please check and try again.");
         return targetProtection;
-    }
-
-    public static void paymentDoctorsClaim(Doctor doctor) throws Exception {
-        if (ClinicFile.balance < doctor.getClaim())
-            throw new Exception("Insufficient inventory");
-        ClinicFile.balance -= doctor.getClaim();
-        if (doctor.getClaim() == 0)
-            throw new Exception("There is no claim to pay");
-        doctor.setClaim(0);
     }
 
     //registration of personnel's overtime with use polymorphism

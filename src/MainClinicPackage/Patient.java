@@ -21,9 +21,9 @@ public class Patient extends Person {
     public void applyVisit(Doctor doctor , String description) {
         //add the incomplete visit to patient's , doctor's and clinic's incomplete visit list
         Visit visit = new Visit(doctor, this , description);
+        visit.save();
         visits.add(visit);
         doctor.addVisit(visit);
-        visit.save();
     }
 
     public void showCompleteVisits() {

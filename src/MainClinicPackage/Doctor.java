@@ -7,36 +7,17 @@ public class Doctor extends Person {
     private String expertise;
     public static int doctor_ID = 1;
     private int doctorID;
-    private int fee;
-    private int claim;
     private ArrayList<Visit> visits;
 
-    public Doctor(String fullName, int age, String address, String phoneNumber, String userName, String passWord, String expertise, int fee) {
+    public Doctor(String fullName, int age, String address, String phoneNumber, String userName, String passWord, String expertise) {
         super(fullName, age, address, phoneNumber, userName, passWord);
         this.expertise = expertise;
         doctorID = doctor_ID++;
-        this.fee = fee;
         this.visits = new ArrayList<>();
-    }
-
-    public void setFee(int fee) {
-        this.fee = fee;
-    }
-
-    public void setClaim(int claim) {
-        this.claim = claim;
     }
 
     public String getExpertise() {
         return expertise;
-    }
-
-    public int getFee() {
-        return fee;
-    }
-
-    public int getClaim() {
-        return claim;
     }
 
     public ArrayList<Visit> getVisits() {
@@ -68,13 +49,6 @@ public class Doctor extends Person {
     public int getDoctorID() {
         return doctorID;
     }
-
-//    @Override
-    public void completeVisiting() { //when the doctor complete the visit
-        claim += fee; //calculate claim
-        ClinicFile.balance += fee * 1.3; //As much as 30% of each visit is the share of the clinic :)
-    }
-
 
     public void addVisit(Visit visit) {
         visits.add(visit);
@@ -109,8 +83,6 @@ public class Doctor extends Person {
                 "fullName: '" + fullName +
                 '\'' + " , expertise: '" + expertise +
                 '\'' + " , doctorID: " + doctorID +
-                " , fee: " + fee +
-                " , claim: " + claim +
                 " , age: " + age +
                 " , address: '" + address + '\'' +
                 " , phoneNumber: " + phoneNumber +

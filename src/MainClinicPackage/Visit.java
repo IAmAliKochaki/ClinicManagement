@@ -54,7 +54,6 @@ public class Visit implements Serializable {
     public void complete() {
         this.checked = true;
         this.completeDate = new Date();
-        doctor.addVisit(this); //add complete visit to doctor's list and clinic's list
     }
 
     //add drug to prescription

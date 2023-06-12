@@ -72,6 +72,7 @@ public class Doctor extends Person {
         try {
             getInCompleteVisitByID(visitID).completePrescription(drug);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 

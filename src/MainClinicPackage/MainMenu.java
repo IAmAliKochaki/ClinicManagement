@@ -622,6 +622,7 @@ public class MainMenu {
         private static void editNurseSBaseSalary() {
             Manager.showNurses();
 
+            System.out.print("Enter the nurse ID : ");
             try {
                 int nurseId = intScanner.nextInt();
                 Nurse nurse = Manager.getNurseByID(nurseId);
@@ -640,7 +641,6 @@ public class MainMenu {
             System.out.print("1: Back");
             String back;
             while (true) {
-                System.out.print("1: Back");
                 back = scanner.nextLine();
                 if (back.equals("1"))
                     edit();
@@ -651,7 +651,7 @@ public class MainMenu {
 
         private static void editEmployeeSBaseSalary() {
             Manager.showEmployee();
-
+            System.out.print("Enter the employee ID: ");
             try {
                 int employeeId = intScanner.nextInt();
                 Employee employee = Manager.getEmployeeByID(employeeId);
@@ -670,7 +670,6 @@ public class MainMenu {
             System.out.print("1: Back");
             String back;
             while (true) {
-                System.out.print("1: Back");
                 back = scanner.nextLine();
                 if (back.equals("1"))
                     edit();
@@ -681,7 +680,7 @@ public class MainMenu {
 
         private static void editProtectionSBaseSalary() {
             Manager.showProtection();
-
+            System.out.print("Enter the employee ID: ");
             try {
                 int protectionId = intScanner.nextInt();
                 Protection protection = Manager.getProtectionByID(protectionId);
@@ -700,7 +699,6 @@ public class MainMenu {
             System.out.print("1: Back");
             String back;
             while (true) {
-                System.out.print("1: Back");
                 back = scanner.nextLine();
                 if (back.equals("1"))
                     edit();
@@ -897,7 +895,7 @@ public class MainMenu {
 
                 System.out.print("Enter the visit's id: ");
                 int visitId = intScanner.nextInt();
-                Visit visit = doctor.getInCompleteVisitByID(visitId);
+                Visit visit1 = doctor.getInCompleteVisitByID(visitId);
 
                 for (Drug drug : ClinicFile.drugs) {
                     if (drug.getExpertise().equals(doctor.getExpertise()))
@@ -920,7 +918,6 @@ public class MainMenu {
                         if (drug.getExpertise().equals(doctor.getExpertise())) {
                             doctor.visiting(visitId, drug);
                             visitCheck = true;
-                            Manager.getVisitByID(visitId).complete();
                             ClinicFile.writeDoctor();
                             ClinicFile.writeVisit();
                             ClinicFile.writePatient();
@@ -934,7 +931,9 @@ public class MainMenu {
                 }
                 if (visitCheck == true) {
                     System.out.println("The visit is complete");
-                    visit.setChecked(true);
+                    Manager.getVisitByID(visitId).complete();
+                    ClinicFile.balance+=50;
+                    ClinicFile.writeBalance();
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());

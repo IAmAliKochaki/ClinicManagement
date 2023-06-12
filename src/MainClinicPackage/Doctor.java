@@ -71,8 +71,6 @@ public class Doctor extends Person {
     public void visiting(int visitID, Drug drug) {
         try {
             getInCompleteVisitByID(visitID).completePrescription(drug);
-            getInCompleteVisitByID(visitID).setChecked(true);
-            getInCompleteVisitByID(visitID).setCompleteDate(new Date());
         } catch (Exception e) {
         }
     }

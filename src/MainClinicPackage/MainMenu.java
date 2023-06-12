@@ -436,6 +436,7 @@ public class MainMenu {
                 ClinicFile.remove(Manager.getDoctorByID(id));
                 System.out.println("The doctor successfully");
             } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
             System.out.println("1: Back");
             String back;
@@ -457,6 +458,7 @@ public class MainMenu {
                 ClinicFile.remove(Manager.getPatientByID(id));
                 System.out.println("The patient remove successfully");
             } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
             System.out.println("1: Back");
             String back;
@@ -478,6 +480,7 @@ public class MainMenu {
                 ClinicFile.remove(Manager.getNurseByID(id));
                 System.out.println("The nurse remove successfully");
             } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
             System.out.println("1: Back");
             String back;
@@ -499,6 +502,7 @@ public class MainMenu {
                 ClinicFile.remove(Manager.getEmployeeByID(id));
                 System.out.println("The employee remove successfully");
             } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
             System.out.println("1: Back");
             String back;
@@ -520,6 +524,7 @@ public class MainMenu {
                 ClinicFile.remove(Manager.getProtectionByID(id));
                 System.out.println("The protection remove successfully");
             } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
             System.out.println("1: Back");
             String back;
@@ -541,6 +546,7 @@ public class MainMenu {
                 ClinicFile.remove(Manager.getDrugByID(id));
                 System.out.println("The drug remove successfully");
             } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
             System.out.println("1: Back");
             String back;
@@ -628,6 +634,7 @@ public class MainMenu {
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input!");
             } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
 
             System.out.print("1: Back");
@@ -657,6 +664,7 @@ public class MainMenu {
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input!");
             } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
 
             System.out.print("1: Back");
@@ -686,6 +694,7 @@ public class MainMenu {
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input!");
             } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
 
             System.out.print("1: Back");
@@ -715,6 +724,7 @@ public class MainMenu {
                 ClinicFile.writeBalance();
                 System.out.println("Payment was successful.");
             } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
 
             System.out.println("1: Back");
@@ -743,6 +753,7 @@ public class MainMenu {
                 ClinicFile.writeBalance();
                 System.out.println("Payment was successful.");
             } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
 
             System.out.println("1: Back");
@@ -771,6 +782,7 @@ public class MainMenu {
                 ClinicFile.writeBalance();
                 System.out.println("Payment was successful.");
             } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
 
             System.out.println("1: Back");
@@ -863,6 +875,7 @@ public class MainMenu {
                     System.out.println(visit);
                 }
             } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
 
             System.out.println("1: Back");
@@ -876,6 +889,7 @@ public class MainMenu {
         }
 
         private static void visiting() {
+            boolean visitCheck = false;
             try {
                 for (Visit visit : doctor.getInCompleteVisits()) {
                     System.out.println(visit);
@@ -883,7 +897,7 @@ public class MainMenu {
 
                 System.out.print("Enter the visit's id: ");
                 int visitId = intScanner.nextInt();
-                doctor.getInCompleteVisitByID(visitId);
+                Visit visit = doctor.getInCompleteVisitByID(visitId);
 
                 for (Drug drug : ClinicFile.drugs) {
                     if (drug.getExpertise().equals(doctor.getExpertise()))
@@ -891,42 +905,42 @@ public class MainMenu {
                 }
 
                 int drugId;// get drug's id from doctor
-//                boolean complete = false;//when the doctor complete the prescription, enter 0 and complete set true
-                boolean visit = false;//if doctor complete visit , visit set true
                 Drug drug;
 
                 System.out.println("Enter the drug ID you want to add to the prescription (enter 0 to end):");
 
                 while (true) {
-                    drugId = intScanner.nextInt();
+                    try {
+                        drugId = intScanner.nextInt();
+                        if (drugId == 0) {
+                            break;
+                        }
+                        drug = Manager.getDrugByID(drugId);
 
-                    drug = Manager.getDrugByID(drugId);
-
-                    if (drugId == 0) {
-//                        complete = true;
-                        break;
+                        if (drug.getExpertise().equals(doctor.getExpertise())) {
+                            doctor.visiting(visitId, drug);
+                            visitCheck = true;
+                            Manager.getVisitByID(visitId).complete();
+                            ClinicFile.writeDoctor();
+                            ClinicFile.writeVisit();
+                            ClinicFile.writePatient();
+                            ClinicFile.writeBalance();
+                        } else if (!(drug.getExpertise().equals(doctor.getExpertise()))) {
+                            System.out.println("You do not have access to this drug!");
+                        }
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
                     }
-
-                    if (drug.getExpertise().equals(doctor.getExpertise())) {
-                        doctor.visiting(visitId, drug);
-                        Manager.getVisitByID(visitId).complete();
-                        ClinicFile.writeDoctor();
-                        ClinicFile.writeVisit();
-                        ClinicFile.writePatient();
-                        ClinicFile.writeBalance();
-                        visit = true;
-                    } else if (!(drug.getExpertise().equals(doctor.getExpertise()))) {
-                        System.out.println("You do not have access to this drug!");
-                    }
-
-//                    if (complete)
-//                        break;
                 }
-                if (visit) {
+                if (visitCheck == true) {
                     System.out.println("The visit is complete");
+                    visit.setChecked(true);
                 }
             } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
+
+
 
             System.out.println("1: Back");
             String back;
@@ -1039,7 +1053,7 @@ public class MainMenu {
             Patient patient = new Patient(name, age, address, phoneNumber, userName, passWord);
             patient.save();
             System.out.println("Successfully");
-            patientMenu();
+            main();
         }
 
         private static void patientMenu() {
@@ -1059,7 +1073,7 @@ public class MainMenu {
                     case "2":
                         try {
                             patient.showCompleteVisits();
-                        } catch (NullPointerException e) {
+                        } catch (Exception e) {
                             System.out.println("There are no complete visit to show!");
                         }
                         patientMenu();
@@ -1067,7 +1081,7 @@ public class MainMenu {
                     case "3":
                         try {
                             patient.showInCompleteVisits();
-                        } catch (NullPointerException e) {
+                        } catch (Exception e) {
                             System.out.println("There are no incomplete visit to show!");
                         }
                         patientMenu();

@@ -11,11 +11,6 @@ public class Visit implements Serializable {
     private Patient patient;
     private ArrayList<Drug> prescription;
     private Date applyDate;
-
-    public void setCompleteDate(Date completeDate) {
-        this.completeDate = completeDate;
-    }
-
     private Date completeDate;
     private Boolean checked;
     private String description;

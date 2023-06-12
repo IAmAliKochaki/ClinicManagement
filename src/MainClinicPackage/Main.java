@@ -13,5 +13,6 @@ public class Main {
         ClinicFile.readBalance();
 
         MainMenu.main();
+
     }
 }
